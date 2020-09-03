@@ -99,7 +99,17 @@ class _HomePageState extends State<HomePage> {
 
   String urunTipi = "1";
 
+  String sensSev1 = "0.0";
+  String sensSev2 = "0.0";
+  String sensSev3 = "0.0";
+
   int sayac = 0;
+
+  List<bool> t1ortalamadakiSensor = new List.filled(4, false);
+  List<bool> t2ortalamadakiSensor = new List.filled(4, false);
+  List<bool> t3ortalamadakiSensor = new List.filled(4, false);
+  List<bool> t4ortalamadakiSensor = new List.filled(4, false);
+  List<bool> t5ortalamadakiSensor = new List.filled(4, false);
 
   @override
   Widget build(BuildContext context) {
@@ -215,6 +225,12 @@ class _HomePageState extends State<HomePage> {
                       t1SanalSensorAktiflik,
                       1,
                       ortalamaT1,
+                      double.parse(sensSev1),
+                      double.parse(sensSev2),
+                      double.parse(sensSev3),
+                      t1ortalamadakiSensor[1],
+                      t1ortalamadakiSensor[2],
+                      t1ortalamadakiSensor[3],
                       data: tank1,
                     )),
                     Expanded(
@@ -228,6 +244,12 @@ class _HomePageState extends State<HomePage> {
                       t2SanalSensorAktiflik,
                       2,
                       ortalamaT2,
+                      double.parse(sensSev1),
+                      double.parse(sensSev2),
+                      double.parse(sensSev3),
+                      t2ortalamadakiSensor[1],
+                      t2ortalamadakiSensor[2],
+                      t2ortalamadakiSensor[3],
                       data: tank2,
                     )),
                     Expanded(
@@ -241,6 +263,12 @@ class _HomePageState extends State<HomePage> {
                       t3SanalSensorAktiflik,
                       3,
                       ortalamaT3,
+                      double.parse(sensSev1),
+                      double.parse(sensSev2),
+                      double.parse(sensSev3),
+                      t3ortalamadakiSensor[1],
+                      t3ortalamadakiSensor[2],
+                      t3ortalamadakiSensor[3],
                       data: tank3,
                     )),
                     Expanded(
@@ -254,6 +282,12 @@ class _HomePageState extends State<HomePage> {
                       t4SanalSensorAktiflik,
                       4,
                       ortalamaT4,
+                      double.parse(sensSev1),
+                      double.parse(sensSev2),
+                      double.parse(sensSev3),
+                      t4ortalamadakiSensor[1],
+                      t4ortalamadakiSensor[2],
+                      t4ortalamadakiSensor[3],
                       data: tank4,
                     )),
                     Expanded(
@@ -267,6 +301,12 @@ class _HomePageState extends State<HomePage> {
                       t5SanalSensorAktiflik,
                       5,
                       ortalamaT5,
+                      double.parse(sensSev1),
+                      double.parse(sensSev2),
+                      double.parse(sensSev3),
+                      t5ortalamadakiSensor[1],
+                      t5ortalamadakiSensor[2],
+                      t5ortalamadakiSensor[3],
                       data: tank5,
                     )),
                   ],
@@ -1845,7 +1885,7 @@ class _HomePageState extends State<HomePage> {
                                                 onLongPress: () {
                                                   kayitAdet = 0;
                                                   gelenZaman = [];
-                                                  
+
                                                   gelenDoluluk = [];
                                                   gelenMiktar = [];
                                                   gelensens1 = [];
@@ -1855,9 +1895,7 @@ class _HomePageState extends State<HomePage> {
                                                       "Log tablosu sıfırlandı",
                                                       context,
                                                       duration: 2);
-                                                      setState(() {
-                                                        
-                                                      });
+                                                  setState(() {});
                                                 },
                                                 onPressed: () {
                                                   if (tarihIlk.month !=
@@ -2362,6 +2400,78 @@ class _HomePageState extends State<HomePage> {
     t3SanSens = degerler[38];
     t4SanSens = degerler[39];
     t5SanSens = degerler[40];
+
+    sensSev1 = degerler[41];
+    sensSev2 = degerler[42];
+    sensSev3 = degerler[43];
+
+    t1ortalamadakiSensor[1] = true;
+    t2ortalamadakiSensor[1] = true;
+    t3ortalamadakiSensor[1] = true;
+    t4ortalamadakiSensor[1] = true;
+    t5ortalamadakiSensor[1] = true;
+
+    if (dolulukT1 >= double.parse(sensSev2)) {
+      t1ortalamadakiSensor[2] = true;
+    } else {
+      t1ortalamadakiSensor[2] = false;
+    }
+
+    if (dolulukT1 >= double.parse(sensSev3)) {
+      t1ortalamadakiSensor[3] = true;
+    } else {
+      t1ortalamadakiSensor[3] = false;
+    }
+
+    if (dolulukT2 >= double.parse(sensSev2)) {
+      t2ortalamadakiSensor[2] = true;
+    } else {
+      t2ortalamadakiSensor[2] = false;
+    }
+
+    if (dolulukT2 >= double.parse(sensSev3)) {
+      t2ortalamadakiSensor[3] = true;
+    } else {
+      t2ortalamadakiSensor[3] = false;
+    }
+
+    if (dolulukT3 >= double.parse(sensSev2)) {
+      t3ortalamadakiSensor[2] = true;
+    } else {
+      t3ortalamadakiSensor[2] = false;
+    }
+
+    if (dolulukT3 >= double.parse(sensSev3)) {
+      t3ortalamadakiSensor[3] = true;
+    } else {
+      t3ortalamadakiSensor[3] = false;
+    }
+
+    if (dolulukT4 >= double.parse(sensSev2)) {
+      t4ortalamadakiSensor[2] = true;
+    } else {
+      t4ortalamadakiSensor[2] = false;
+    }
+
+    if (dolulukT4 >= double.parse(sensSev3)) {
+      t4ortalamadakiSensor[3] = true;
+    } else {
+      t4ortalamadakiSensor[3] = false;
+    }
+
+    if (dolulukT5 >= double.parse(sensSev2)) {
+      t5ortalamadakiSensor[2] = true;
+    } else {
+      t5ortalamadakiSensor[2] = false;
+    }
+
+    if (dolulukT5 >= double.parse(sensSev3)) {
+      t5ortalamadakiSensor[3] = true;
+    } else {
+      t5ortalamadakiSensor[3] = false;
+    }
+
+    print(t1ortalamadakiSensor);
 
     baglanti = false;
     if (!timerCancel) {

@@ -19,6 +19,12 @@ class TankGrafik extends StatefulWidget {
   bool tankSanSenVisibility = false;
   int tankIndex;
   String tankOrtalama;
+  double tankSensSev1 = 0.0;
+  double tankSensSev2 = 0.0;
+  double tankSensSev3 = 0.0;
+  bool tankSens1OrtDurum = false;
+  bool tankSens2OrtDurum = false;
+  bool tankSens3OrtDurum = false;
   TankGrafik(
       String baslik,
       String miktar,
@@ -29,6 +35,12 @@ class TankGrafik extends StatefulWidget {
       bool sanSenVisibility,
       int index,
       String ortalama,
+      double sensSev1,
+      double sensSev2,
+      double sensSev3,
+      bool sens1OrtDurum,
+      bool sens2OrtDurum,
+      bool sens3OrtDurum,
       {this.data}) {
     tankBaslik = baslik;
     tankMiktar = miktar;
@@ -39,6 +51,12 @@ class TankGrafik extends StatefulWidget {
     tankSanSenVisibility = sanSenVisibility;
     tankIndex = index;
     tankOrtalama = ortalama;
+    tankSensSev1 = sensSev1;
+    tankSensSev2 = sensSev2;
+    tankSensSev3 = sensSev3;
+    tankSens1OrtDurum = sens1OrtDurum;
+    tankSens2OrtDurum = sens2OrtDurum;
+    tankSens3OrtDurum = sens3OrtDurum;
   }
 
   @override
@@ -52,8 +70,6 @@ class _TankGrafikState extends State<TankGrafik> {
 
   int _ondalik = 0;
 
-  int _index = 0;
-
   bool timerCancel = false;
 
   int timerSayac = 0;
@@ -64,6 +80,12 @@ class _TankGrafikState extends State<TankGrafik> {
 
   @override
   Widget build(BuildContext context) {
+    String xx = widget.tankSanSen;
+    var yy = xx.split(".");
+    _onlar = int.parse(yy[0]) ~/ 10;
+    _birler = int.parse(yy[0]) % 10;
+    _ondalik = int.parse(yy[1]);
+
     List<charts.Series<TankGrafikVeriler, String>> series = [
       charts.Series(
           id: "Subscribers",
@@ -128,8 +150,9 @@ class _TankGrafikState extends State<TankGrafik> {
                                       new charts.StaticNumericTickProviderSpec(
                                     <charts.TickSpec<num>>[
                                       charts.TickSpec<num>(0),
-                                      charts.TickSpec<num>(33),
-                                      charts.TickSpec<num>(66),
+                                      charts.TickSpec<num>(widget.tankSensSev1),
+                                      charts.TickSpec<num>(widget.tankSensSev2),
+                                      charts.TickSpec<num>(widget.tankSensSev3),
                                       //charts.TickSpec<num>(75),
                                       charts.TickSpec<num>(100),
                                     ],
@@ -197,8 +220,17 @@ class _TankGrafikState extends State<TankGrafik> {
                                                     Alignment.bottomCenter,
                                                 child: AutoSizeText(
                                                   "Sıc.Sens3",
-                                                  style:
-                                                      TextStyle(fontSize: 30),
+                                                  style: TextStyle(
+                                                    fontSize: 30,
+                                                    color:
+                                                        widget.tankSens3OrtDurum
+                                                            ? Colors.orange[700]
+                                                            : Colors.black,
+                                                    fontWeight:
+                                                        widget.tankSens3OrtDurum
+                                                            ? FontWeight.bold
+                                                            : FontWeight.normal,
+                                                  ),
                                                   textAlign: TextAlign.center,
                                                   maxLines: 1,
                                                 ),
@@ -238,8 +270,17 @@ class _TankGrafikState extends State<TankGrafik> {
                                                     Alignment.bottomCenter,
                                                 child: AutoSizeText(
                                                   "Sıc.Sens2",
-                                                  style:
-                                                      TextStyle(fontSize: 30),
+                                                  style: TextStyle(
+                                                    fontSize: 30,
+                                                    color:
+                                                        widget.tankSens2OrtDurum
+                                                            ? Colors.orange[700]
+                                                            : Colors.black,
+                                                    fontWeight:
+                                                        widget.tankSens2OrtDurum
+                                                            ? FontWeight.bold
+                                                            : FontWeight.normal,
+                                                  ),
                                                   textAlign: TextAlign.center,
                                                   maxLines: 1,
                                                 ),
@@ -279,8 +320,17 @@ class _TankGrafikState extends State<TankGrafik> {
                                                     Alignment.bottomCenter,
                                                 child: AutoSizeText(
                                                   "Sıc.Sens1",
-                                                  style:
-                                                      TextStyle(fontSize: 30),
+                                                  style: TextStyle(
+                                                    fontSize: 30,
+                                                    color:
+                                                        widget.tankSens1OrtDurum
+                                                            ? Colors.orange[700]
+                                                            : Colors.black,
+                                                    fontWeight:
+                                                        widget.tankSens1OrtDurum
+                                                            ? FontWeight.bold
+                                                            : FontWeight.normal,
+                                                  ),
                                                   textAlign: TextAlign.center,
                                                   maxLines: 1,
                                                 ),
@@ -443,13 +493,13 @@ class _TankGrafikState extends State<TankGrafik> {
       if (_onlar != val[0] ||
           _birler != val[1] ||
           _ondalik != val[2] ||
-          _index != val[3]) {
+          index != val[3]) {
         veriGonderilsinMi = true;
       }
       _onlar = val[0];
       _birler = val[1];
       _ondalik = val[2];
-      _index = val[3];
+      index = val[3];
 
       String veri = "";
 
@@ -461,7 +511,7 @@ class _TankGrafikState extends State<TankGrafik> {
 
       if (veriGonderilsinMi) {
         yazmaSonrasiGecikmeSayaci = 0;
-        String komut = "3*$_index*$veri";
+        String komut = "3*$index*$veri";
         veriGonder(komut, 3000).then((value) {
           if (value.split("*")[0] == "error") {
             Toast.show(
