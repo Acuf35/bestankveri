@@ -211,7 +211,7 @@ class _HomePageState extends State<HomePage> {
           children: [
             Expanded(
               child: Container(
-                color: Colors.yellow[300],
+                color: Colors.yellow[200],
                 child: Row(
                   children: [
                     Expanded(
@@ -231,6 +231,7 @@ class _HomePageState extends State<HomePage> {
                       t1ortalamadakiSensor[1],
                       t1ortalamadakiSensor[2],
                       t1ortalamadakiSensor[3],
+                      oran,
                       data: tank1,
                     )),
                     Expanded(
@@ -250,6 +251,7 @@ class _HomePageState extends State<HomePage> {
                       t2ortalamadakiSensor[1],
                       t2ortalamadakiSensor[2],
                       t2ortalamadakiSensor[3],
+                      oran,
                       data: tank2,
                     )),
                     Expanded(
@@ -269,6 +271,7 @@ class _HomePageState extends State<HomePage> {
                       t3ortalamadakiSensor[1],
                       t3ortalamadakiSensor[2],
                       t3ortalamadakiSensor[3],
+                      oran,
                       data: tank3,
                     )),
                     Expanded(
@@ -288,6 +291,7 @@ class _HomePageState extends State<HomePage> {
                       t4ortalamadakiSensor[1],
                       t4ortalamadakiSensor[2],
                       t4ortalamadakiSensor[3],
+                      oran,
                       data: tank4,
                     )),
                     Expanded(
@@ -307,6 +311,7 @@ class _HomePageState extends State<HomePage> {
                       t5ortalamadakiSensor[1],
                       t5ortalamadakiSensor[2],
                       t5ortalamadakiSensor[3],
+                      oran,
                       data: tank5,
                     )),
                   ],
@@ -330,7 +335,7 @@ class _HomePageState extends State<HomePage> {
                                 alignment: Alignment.bottomCenter,
                                 child: AutoSizeText(
                                   "Sanal Sensör Aktiflik",
-                                  style: TextStyle(fontSize: 20),
+                                  style: TextStyle(fontSize: 15*oran),
                                   maxLines: 1,
                                 ),
                               ),
@@ -338,7 +343,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                           //Sanal Sensör Aktiflik
                           Expanded(
-                            flex: 5,
+                            flex: 6,
                             child: Column(
                               children: [
                                 //Tank 1-2-3
@@ -848,7 +853,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                           Spacer(
-                            flex: 2,
+                            flex: 1,
                           ),
                           //Pamuk-Soya seçimi
                           Expanded(
@@ -861,48 +866,56 @@ class _HomePageState extends State<HomePage> {
                                   //PAMUK seçim butonu
                                   Expanded(
                                     flex: 6,
-                                    child: RawMaterialButton(
-                                      constraints: BoxConstraints(
-                                          minWidth: double.infinity),
-                                      onPressed: () {
-                                        if (urunTipi == "2") {
-                                          urunTipi = "1";
-                                        }
+                                    child: Column(
+                                      children: [
+                                        Spacer(),
+                                        Expanded(flex: 4,
+                                          child: RawMaterialButton(
+                                            constraints: BoxConstraints(
+                                                minWidth: double.infinity),
+                                            onPressed: () {
+                                              if (urunTipi == "2") {
+                                                urunTipi = "1";
+                                              }
 
-                                        yazmaSonrasiGecikmeSayaci = 0;
-                                        String komut = "1*$urunTipi";
-                                        veriGonder(komut, 3000).then((value) {
-                                          if (value.split("*")[0] == "error") {
-                                            Toast.show(
-                                                "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
-                                                context,
-                                                duration: 3);
-                                          } else {
-                                            Toast.show("Başarılı", context,
-                                                duration: 3);
+                                              yazmaSonrasiGecikmeSayaci = 0;
+                                              String komut = "1*$urunTipi";
+                                              veriGonder(komut, 3000).then((value) {
+                                                if (value.split("*")[0] == "error") {
+                                                  Toast.show(
+                                                      "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
+                                                      context,
+                                                      duration: 3);
+                                                } else {
+                                                  Toast.show("Başarılı", context,
+                                                      duration: 3);
 
-                                            baglanti = false;
-                                          }
-                                        });
+                                                  baglanti = false;
+                                                }
+                                              });
 
-                                        setState(() {});
-                                      },
-                                      fillColor: urunTipi == "1"
-                                          ? Colors.green
-                                          : Colors.grey,
-                                      child: SizedBox(
-                                        child: Container(
-                                          child: AutoSizeText(
-                                            "PAMUK",
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 30,
-                                                fontWeight: FontWeight.bold),
-                                            maxLines: 1,
-                                            textAlign: TextAlign.center,
+                                              setState(() {});
+                                            },
+                                            fillColor: urunTipi == "1"
+                                                ? Colors.green
+                                                : Colors.grey,
+                                            child: SizedBox(
+                                              child: Container(
+                                                child: AutoSizeText(
+                                                  "PAMUK",
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 30,
+                                                      fontWeight: FontWeight.bold),
+                                                  maxLines: 1,
+                                                  textAlign: TextAlign.center,
+                                                ),
+                                              ),
+                                            ),
                                           ),
                                         ),
-                                      ),
+                                        Spacer(),
+                                      ],
                                     ),
                                   ),
                                   Spacer(
@@ -911,48 +924,56 @@ class _HomePageState extends State<HomePage> {
                                   //SOYA seçim butonu
                                   Expanded(
                                     flex: 6,
-                                    child: RawMaterialButton(
-                                      constraints: BoxConstraints(
-                                          minWidth: double.infinity),
-                                      onPressed: () {
-                                        if (urunTipi == "1") {
-                                          urunTipi = "2";
-                                        }
+                                    child: Column(
+                                      children: [
+                                        Spacer(),
+                                        Expanded(flex: 4,
+                                          child: RawMaterialButton(
+                                            constraints: BoxConstraints(
+                                                minWidth: double.infinity),
+                                            onPressed: () {
+                                              if (urunTipi == "1") {
+                                                urunTipi = "2";
+                                              }
 
-                                        yazmaSonrasiGecikmeSayaci = 0;
-                                        String komut = "1*$urunTipi";
-                                        veriGonder(komut, 3000).then((value) {
-                                          if (value.split("*")[0] == "error") {
-                                            Toast.show(
-                                                "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
-                                                context,
-                                                duration: 3);
-                                          } else {
-                                            Toast.show("Başarılı", context,
-                                                duration: 3);
+                                              yazmaSonrasiGecikmeSayaci = 0;
+                                              String komut = "1*$urunTipi";
+                                              veriGonder(komut, 3000).then((value) {
+                                                if (value.split("*")[0] == "error") {
+                                                  Toast.show(
+                                                      "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
+                                                      context,
+                                                      duration: 3);
+                                                } else {
+                                                  Toast.show("Başarılı", context,
+                                                      duration: 3);
 
-                                            baglanti = false;
-                                          }
-                                        });
+                                                  baglanti = false;
+                                                }
+                                              });
 
-                                        setState(() {});
-                                      },
-                                      fillColor: urunTipi == "2"
-                                          ? Colors.green
-                                          : Colors.grey,
-                                      child: SizedBox(
-                                        child: Container(
-                                          child: AutoSizeText(
-                                            "SOYA",
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 30,
-                                                fontWeight: FontWeight.bold),
-                                            maxLines: 1,
-                                            textAlign: TextAlign.center,
+                                              setState(() {});
+                                            },
+                                            fillColor: urunTipi == "2"
+                                                ? Colors.green
+                                                : Colors.grey,
+                                            child: SizedBox(
+                                              child: Container(
+                                                child: AutoSizeText(
+                                                  "SOYA",
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 30,
+                                                      fontWeight: FontWeight.bold),
+                                                  maxLines: 1,
+                                                  textAlign: TextAlign.center,
+                                                ),
+                                              ),
+                                            ),
                                           ),
                                         ),
-                                      ),
+                                        Spacer()
+                                      ],
                                     ),
                                   ),
                                   Spacer(
@@ -996,10 +1017,10 @@ class _HomePageState extends State<HomePage> {
                     Expanded(
                       flex: 3,
                       child: Container(
-                        padding: EdgeInsets.all(5),
-                        margin: EdgeInsets.all(5),
+                        padding: EdgeInsets.all(3*oran),
+                        margin: EdgeInsets.all(3*oran),
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
+                            borderRadius: BorderRadius.circular(15*oran),
                             color: Colors.grey[400]),
                         child: Row(
                           children: [
@@ -1041,10 +1062,10 @@ class _HomePageState extends State<HomePage> {
                                               alignment: Alignment.center,
                                               decoration: BoxDecoration(
                                                   borderRadius:
-                                                      BorderRadius.circular(10),
+                                                      BorderRadius.circular(5*oran),
                                                   color: Colors.blue),
                                               margin: EdgeInsets.only(
-                                                  left: 3, right: 3),
+                                                  left: 2*oran, right: 2*oran),
                                               child: RawMaterialButton(
                                                 constraints: BoxConstraints(
                                                     minWidth: double.infinity),
@@ -1084,17 +1105,19 @@ class _HomePageState extends State<HomePage> {
                                                                   //Başlık bölümü
                                                                   Expanded(
                                                                     flex: 1,
-                                                                    child: Center(
-                                                                        child: Text(
+                                                                    child: SizedBox(
+                                                                        child: Container(
+                                                                          child: AutoSizeText(
                                                                       "Tank Seçimi",
                                                                       style: TextStyle(
-                                                                          fontFamily:
-                                                                              'Kelly Slab',
-                                                                          fontSize:
-                                                                              30,
-                                                                          fontWeight:
-                                                                              FontWeight.bold),
-                                                                    )),
+                                                                            fontFamily:
+                                                                                'Kelly Slab',
+                                                                            fontSize:
+                                                                                30,
+                                                                            fontWeight:
+                                                                                FontWeight.bold),
+                                                                    ),
+                                                                        )),
                                                                   ),
                                                                   //Kayıt türü seçim bölümü
                                                                   Expanded(
@@ -1149,7 +1172,7 @@ class _HomePageState extends State<HomePage> {
                                                                                               },
                                                                                               child: SizedBox(
                                                                                                 child: Container(
-                                                                                                  child: Text(
+                                                                                                  child: AutoSizeText(
                                                                                                     "Tank 1",
                                                                                                     style: TextStyle(fontFamily: 'Kelly Slab', fontSize: 35, color: Colors.white),
                                                                                                     maxLines: 1,
@@ -1193,7 +1216,7 @@ class _HomePageState extends State<HomePage> {
                                                                                               },
                                                                                               child: SizedBox(
                                                                                                 child: Container(
-                                                                                                  child: Text(
+                                                                                                  child: AutoSizeText(
                                                                                                     "Tank 2",
                                                                                                     style: TextStyle(fontFamily: 'Kelly Slab', fontSize: 35, color: Colors.white),
                                                                                                     maxLines: 1,
@@ -1249,7 +1272,7 @@ class _HomePageState extends State<HomePage> {
                                                                                               },
                                                                                               child: SizedBox(
                                                                                                 child: Container(
-                                                                                                  child: Text(
+                                                                                                  child: AutoSizeText(
                                                                                                     "Tank 3",
                                                                                                     style: TextStyle(fontFamily: 'Kelly Slab', fontSize: 35, color: Colors.white),
                                                                                                     maxLines: 1,
@@ -1294,7 +1317,7 @@ class _HomePageState extends State<HomePage> {
                                                                                               },
                                                                                               child: SizedBox(
                                                                                                 child: Container(
-                                                                                                  child: Text(
+                                                                                                  child: AutoSizeText(
                                                                                                     "Tank 4",
                                                                                                     style: TextStyle(fontFamily: 'Kelly Slab', fontSize: 35, color: Colors.white),
                                                                                                     maxLines: 1,
@@ -1350,7 +1373,7 @@ class _HomePageState extends State<HomePage> {
                                                                                               },
                                                                                               child: SizedBox(
                                                                                                 child: Container(
-                                                                                                  child: Text(
+                                                                                                  child: AutoSizeText(
                                                                                                     "Tank 5",
                                                                                                     style: TextStyle(fontFamily: 'Kelly Slab', fontSize: 35, color: Colors.white),
                                                                                                     maxLines: 1,
@@ -1425,10 +1448,10 @@ class _HomePageState extends State<HomePage> {
                                             child: Container(
                                               decoration: BoxDecoration(
                                                   borderRadius:
-                                                      BorderRadius.circular(10),
+                                                      BorderRadius.circular(5*oran),
                                                   color: Colors.blue),
                                               margin: EdgeInsets.only(
-                                                  left: 3, right: 3),
+                                                  left: 2*oran, right: 2*oran),
                                               child: RawMaterialButton(
                                                 constraints: BoxConstraints(
                                                     minWidth: double.infinity),
@@ -1738,10 +1761,10 @@ class _HomePageState extends State<HomePage> {
                                             child: Container(
                                               decoration: BoxDecoration(
                                                   borderRadius:
-                                                      BorderRadius.circular(10),
+                                                      BorderRadius.circular(5*oran),
                                                   color: Colors.blue),
                                               margin: EdgeInsets.only(
-                                                  left: 3, right: 3),
+                                                  left: 2*oran, right: 2*oran),
                                               child: RawMaterialButton(
                                                 constraints: BoxConstraints(
                                                     minWidth: double.infinity),
@@ -1806,10 +1829,10 @@ class _HomePageState extends State<HomePage> {
                                             child: Container(
                                               decoration: BoxDecoration(
                                                   borderRadius:
-                                                      BorderRadius.circular(10),
+                                                      BorderRadius.circular(5*oran),
                                                   color: Colors.blue),
                                               margin: EdgeInsets.only(
-                                                  left: 3, right: 3),
+                                                  left: 2*oran, right: 2*oran),
                                               child: RawMaterialButton(
                                                 constraints: BoxConstraints(
                                                     minWidth: double.infinity),
@@ -1859,10 +1882,10 @@ class _HomePageState extends State<HomePage> {
                                             child: Container(
                                               decoration: BoxDecoration(
                                                   borderRadius:
-                                                      BorderRadius.circular(10),
+                                                      BorderRadius.circular(5*oran),
                                                   color: Colors.green[700]),
                                               margin: EdgeInsets.only(
-                                                  left: 3, right: 3),
+                                                  left: 2*oran, right: 2*oran),
                                               child: RawMaterialButton(
                                                 constraints: BoxConstraints(
                                                     minWidth: double.infinity),
@@ -1904,6 +1927,31 @@ class _HomePageState extends State<HomePage> {
                                                           tarihSon.year) {
                                                     Toast.show(
                                                         "Tarih İlk ve Tarih Son parametrelerine aynı ay ve yıl girilmelidir!",
+                                                        context,
+                                                        duration: 3);
+                                                  } else if(tarihSon.day-tarihIlk.day>2 && logDonguSuresi=="5"){
+                                                    Toast.show(
+                                                        "5 dk\'lık periyot için bir defada en fazla 3 günlük veri çekebilirsiniz.",
+                                                        context,
+                                                        duration: 3);
+                                                  } else if(tarihSon.day-tarihIlk.day>5 && logDonguSuresi=="10"){
+                                                    Toast.show(
+                                                        "10 dk\'lık periyot için bir defada en fazla 6 günlük veri çekebilirsiniz.",
+                                                        context,
+                                                        duration: 3);
+                                                  } else if(tarihSon.day-tarihIlk.day>8 && logDonguSuresi=="15"){
+                                                    Toast.show(
+                                                        "15 dk\'lık periyot için bir defada en fazla 9 günlük veri çekebilirsiniz.",
+                                                        context,
+                                                        duration: 3);
+                                                  } else if(tarihSon.day-tarihIlk.day>11 && logDonguSuresi=="20"){
+                                                    Toast.show(
+                                                        "20 dk\'lık periyot için bir defada en fazla 12 günlük veri çekebilirsiniz.",
+                                                        context,
+                                                        duration: 3);
+                                                  } else if(tarihSon.day-tarihIlk.day>17 && logDonguSuresi=="30"){
+                                                    Toast.show(
+                                                        "30 dk\'lık periyot için bir defada en fazla 18 günlük veri çekebilirsiniz.",
                                                         context,
                                                         duration: 3);
                                                   } else {

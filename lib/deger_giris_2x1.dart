@@ -55,10 +55,11 @@ class _DegerGiris2X1State extends State<DegerGiris2X1> {
 
   @override
   Widget build(BuildContext context) {
+    var oran = MediaQuery.of(context).size.width / 731.4;
     return AlertDialog(
-      titlePadding: EdgeInsets.only(top: 10 , bottom: 10 ),
+      titlePadding: EdgeInsets.only(top: 7*oran , bottom: 7*oran ),
       shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(32.0 ))),
+          borderRadius: BorderRadius.all(Radius.circular(25*oran ))),
       backgroundColor: Colors.deepOrange.shade800,
       title: Container(
         alignment: Alignment.center,
@@ -73,16 +74,16 @@ class _DegerGiris2X1State extends State<DegerGiris2X1> {
                     style: TextStyle(
                         fontFamily: 'Kelly Slab',
                         color: Colors.white,
-                        fontSize: 50,
+                        fontSize: 30,
                         fontWeight: FontWeight.bold),
-                    textScaleFactor: 1,
+                    textScaleFactor: oran,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Padding(
                         padding:
-                            EdgeInsets.only(right: 10 , top: 5 ),
+                            EdgeInsets.only(right: 10*oran , top: 5*oran ),
                         child: Column(
                           children: <Widget>[
                             RawMaterialButton(
@@ -92,7 +93,7 @@ class _DegerGiris2X1State extends State<DegerGiris2X1> {
                               padding: EdgeInsets.all(0),
                               child: Image.asset(
                                 'assets/images/deger_artir_icon.png',
-                                scale: 3 / 1,
+                                scale: 4 / oran,
                               ),
                               onPressed: () {
                                 if (onlarX < 9)
@@ -106,10 +107,10 @@ class _DegerGiris2X1State extends State<DegerGiris2X1> {
                             Text(
                               onlarX.toString(),
                               style: TextStyle(
-                                  fontSize: 80,
+                                  fontSize: 50,
                                   fontWeight: FontWeight.bold,
                                   fontFamily: 'Kelly Slab'),
-                              textScaleFactor: 1,
+                              textScaleFactor: oran,
                             ),
                             RawMaterialButton(
                               materialTapTargetSize:
@@ -118,7 +119,7 @@ class _DegerGiris2X1State extends State<DegerGiris2X1> {
                               padding: EdgeInsets.all(0),
                               child: Image.asset(
                                 'assets/images/deger_dusur_icon.png',
-                                scale: 3 / 1,
+                                scale: 4 / oran,
                               ),
                               onPressed: () {
                                 if (onlarX > 0)
@@ -134,7 +135,7 @@ class _DegerGiris2X1State extends State<DegerGiris2X1> {
                       ),
                       Padding(
                         padding:
-                            EdgeInsets.only(right: 10 , top: 5 ),
+                            EdgeInsets.only(right: 10*oran , top: 5*oran ),
                         child: Column(
                           children: <Widget>[
                             RawMaterialButton(
@@ -144,7 +145,7 @@ class _DegerGiris2X1State extends State<DegerGiris2X1> {
                               padding: EdgeInsets.all(0),
                               child: Image.asset(
                                 'assets/images/deger_artir_icon.png',
-                                scale: 3 / 1,
+                                scale: 4 / oran,
                               ),
                               onPressed: () {
                                 if (birlerX < 9)
@@ -158,10 +159,10 @@ class _DegerGiris2X1State extends State<DegerGiris2X1> {
                             Text(
                               birlerX.toString(),
                               style: TextStyle(
-                                  fontSize: 80,
+                                  fontSize: 50,
                                   fontWeight: FontWeight.bold,
                                   fontFamily: 'Kelly Slab'),
-                              textScaleFactor: 1,
+                              textScaleFactor: oran,
                             ),
                             RawMaterialButton(
                               materialTapTargetSize:
@@ -170,7 +171,7 @@ class _DegerGiris2X1State extends State<DegerGiris2X1> {
                               padding: EdgeInsets.all(0),
                               child: Image.asset(
                                 'assets/images/deger_dusur_icon.png',
-                                scale: 3 / 1,
+                                scale: 4 / oran,
                               ),
                               onPressed: () {
                                 if (birlerX > 0)
@@ -187,7 +188,7 @@ class _DegerGiris2X1State extends State<DegerGiris2X1> {
                       Text(".",style: TextStyle(fontSize: 80,fontWeight: FontWeight.bold),),
                       Padding(
                         padding:
-                            EdgeInsets.only(right: 10 , top: 5 ),
+                            EdgeInsets.only(right: 10*oran , top: 5*oran ),
                         child: Column(
                           children: <Widget>[
                             RawMaterialButton(
@@ -197,7 +198,7 @@ class _DegerGiris2X1State extends State<DegerGiris2X1> {
                               padding: EdgeInsets.all(0),
                               child: Image.asset(
                                 'assets/images/deger_artir_icon.png',
-                                scale: 3 / 1,
+                                scale: 4 / oran,
                               ),
                               onPressed: () {
                                 if (ondalikX < 9)
@@ -211,10 +212,10 @@ class _DegerGiris2X1State extends State<DegerGiris2X1> {
                             Text(
                               ondalikX.toString(),
                               style: TextStyle(
-                                  fontSize: 80,
+                                  fontSize: 50,
                                   fontWeight: FontWeight.bold,
                                   fontFamily: 'Kelly Slab'),
-                              textScaleFactor: 1,
+                              textScaleFactor: oran,
                             ),
                             RawMaterialButton(
                               materialTapTargetSize:
@@ -223,7 +224,7 @@ class _DegerGiris2X1State extends State<DegerGiris2X1> {
                               padding: EdgeInsets.all(0),
                               child: Image.asset(
                                 'assets/images/deger_dusur_icon.png',
-                                scale: 3 / 1,
+                                scale: 4 / oran,
                               ),
                               onPressed: () {
                                 if (ondalikX > 0)
@@ -248,15 +249,15 @@ class _DegerGiris2X1State extends State<DegerGiris2X1> {
       ),
       actions: <Widget>[
         Container(
-          padding: EdgeInsets.only(bottom: 10 ),
+          padding: EdgeInsets.only(bottom: 10*oran ),
           alignment: Alignment.center,
-          width: 600 ,
+          width: 400*oran ,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Container(
-                margin: EdgeInsets.only(right: 20 ),
+                margin: EdgeInsets.only(right: 20*oran ),
                 child: RaisedButton(
                   color: Colors.indigo,
                   onPressed: () {
@@ -267,7 +268,7 @@ class _DegerGiris2X1State extends State<DegerGiris2X1> {
                     "ONAY",
                     style: TextStyle(
                         color: Colors.white,
-                        fontSize: 40 ,
+                        fontSize: 25*oran ,
                         fontFamily: 'Audio wide'),
                   ),
                 ),
@@ -283,7 +284,7 @@ class _DegerGiris2X1State extends State<DegerGiris2X1> {
                     "ÇIKIŞ",
                     style: TextStyle(
                         color: Colors.white,
-                        fontSize: 40 ,
+                        fontSize: 25*oran ,
                         fontFamily: 'Audio wide'),
                   ),
                 ),

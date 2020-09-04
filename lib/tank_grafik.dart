@@ -25,6 +25,7 @@ class TankGrafik extends StatefulWidget {
   bool tankSens1OrtDurum = false;
   bool tankSens2OrtDurum = false;
   bool tankSens3OrtDurum = false;
+  double oran;
   TankGrafik(
       String baslik,
       String miktar,
@@ -41,6 +42,7 @@ class TankGrafik extends StatefulWidget {
       bool sens1OrtDurum,
       bool sens2OrtDurum,
       bool sens3OrtDurum,
+      double xOran,
       {this.data}) {
     tankBaslik = baslik;
     tankMiktar = miktar;
@@ -57,6 +59,7 @@ class TankGrafik extends StatefulWidget {
     tankSens1OrtDurum = sens1OrtDurum;
     tankSens2OrtDurum = sens2OrtDurum;
     tankSens3OrtDurum = sens3OrtDurum;
+    oran = xOran;
   }
 
   @override
@@ -64,6 +67,7 @@ class TankGrafik extends StatefulWidget {
 }
 
 class _TankGrafikState extends State<TankGrafik> {
+  double oran = 0.0;
   int _onlar = 0;
 
   int _birler = 0;
@@ -80,6 +84,7 @@ class _TankGrafikState extends State<TankGrafik> {
 
   @override
   Widget build(BuildContext context) {
+    oran= widget.oran;
     String xx = widget.tankSanSen;
     var yy = xx.split(".");
     _onlar = int.parse(yy[0]) ~/ 10;
@@ -96,9 +101,9 @@ class _TankGrafikState extends State<TankGrafik> {
     ];
 
     return SizedBox(
-      height: 400,
+      height: 300*oran,
       child: Container(
-        padding: EdgeInsets.all(10),
+        padding: EdgeInsets.all(5*oran),
         child: Card(
           child: Column(
             children: [
@@ -109,7 +114,7 @@ class _TankGrafikState extends State<TankGrafik> {
                     child: AutoSizeText(
                       widget.tankBaslik,
                       style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 15*oran,
                           fontWeight: FontWeight.bold,
                           color: Colors.green[700]),
                       maxLines: 1,
@@ -122,7 +127,7 @@ class _TankGrafikState extends State<TankGrafik> {
                 child: Row(
                   children: [
                     Expanded(
-                      flex: 8,
+                      flex: 2,
                       child: Column(
                         children: [
                           Expanded(
@@ -136,7 +141,7 @@ class _TankGrafikState extends State<TankGrafik> {
 
                                         // Tick and Label styling here.
                                         labelStyle: new charts.TextStyleSpec(
-                                            fontSize: 18, // size in Pts.
+                                            fontSize: 11, // size in Pts.
                                             color:
                                                 charts.MaterialPalette.black),
 
@@ -159,12 +164,12 @@ class _TankGrafikState extends State<TankGrafik> {
                                   ),
                                   renderSpec: new charts.GridlineRendererSpec(
                                     //labelRotation: 50,
-                                    labelOffsetFromAxisPx: (1 * 1).round(),
+                                    labelOffsetFromAxisPx: (1).round(),
 
                                     // Tick and Label styling here.
                                     labelStyle: new charts.TextStyleSpec(
                                         fontSize:
-                                            (15 * 1).round(), // size in Pts.
+                                            (10).round(), // size in Pts.
                                         color: charts.MaterialPalette.black),
 
                                     // Change the line colors to match text color.
@@ -184,7 +189,7 @@ class _TankGrafikState extends State<TankGrafik> {
                                 child: AutoSizeText(
                                   widget.tankMiktar,
                                   style: TextStyle(
-                                      fontSize: 18,
+                                      fontSize: 11*oran,
                                       fontWeight: FontWeight.bold,
                                       color: Colors.blue[800]),
                                   maxLines: 1,
@@ -196,7 +201,7 @@ class _TankGrafikState extends State<TankGrafik> {
                       ),
                     ),
                     Expanded(
-                      flex: 3,
+                      flex: 1,
                       child: Column(
                         children: [
                           Spacer(
@@ -232,6 +237,7 @@ class _TankGrafikState extends State<TankGrafik> {
                                                             : FontWeight.normal,
                                                   ),
                                                   textAlign: TextAlign.center,
+                                                  minFontSize: 2,
                                                   maxLines: 1,
                                                 ),
                                               ),
@@ -250,6 +256,8 @@ class _TankGrafikState extends State<TankGrafik> {
                                                       fontWeight:
                                                           FontWeight.bold),
                                                   textAlign: TextAlign.center,
+                                                  minFontSize: 2,
+                                                  maxLines: 1,
                                                 ),
                                               ),
                                             ),
@@ -282,6 +290,7 @@ class _TankGrafikState extends State<TankGrafik> {
                                                             : FontWeight.normal,
                                                   ),
                                                   textAlign: TextAlign.center,
+                                                  minFontSize: 2,
                                                   maxLines: 1,
                                                 ),
                                               ),
@@ -300,6 +309,8 @@ class _TankGrafikState extends State<TankGrafik> {
                                                       fontWeight:
                                                           FontWeight.bold),
                                                   textAlign: TextAlign.center,
+                                                  minFontSize: 2,
+                                                  maxLines: 1,
                                                 ),
                                               ),
                                             ),
@@ -332,7 +343,9 @@ class _TankGrafikState extends State<TankGrafik> {
                                                             : FontWeight.normal,
                                                   ),
                                                   textAlign: TextAlign.center,
+                                                  minFontSize: 2,
                                                   maxLines: 1,
+                                                  
                                                 ),
                                               ),
                                             ),
@@ -350,6 +363,9 @@ class _TankGrafikState extends State<TankGrafik> {
                                                       fontWeight:
                                                           FontWeight.bold),
                                                   textAlign: TextAlign.center,
+                                                  minFontSize: 2,
+                                                  maxLines: 1,
+                                                  
                                                 ),
                                               ),
                                             ),
@@ -376,6 +392,7 @@ class _TankGrafikState extends State<TankGrafik> {
                                                         TextStyle(fontSize: 30),
                                                     textAlign: TextAlign.center,
                                                     maxLines: 1,
+                                                    minFontSize: 2,
                                                   ),
                                                 ),
                                               ),
@@ -408,6 +425,8 @@ class _TankGrafikState extends State<TankGrafik> {
                                                                     .bold),
                                                         textAlign:
                                                             TextAlign.center,
+                                                            maxLines: 1,
+                                                            minFontSize: 2,
                                                       ),
                                                     ),
                                                   ),
@@ -437,6 +456,7 @@ class _TankGrafikState extends State<TankGrafik> {
                                         style: TextStyle(fontSize: 30),
                                         textAlign: TextAlign.center,
                                         maxLines: 1,
+                                        minFontSize: 2,
                                       ),
                                     ),
                                   ),
