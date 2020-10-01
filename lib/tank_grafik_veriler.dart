@@ -1,9 +1,9 @@
 import 'package:charts_flutter/flutter.dart' as charts;
 
 class TankGrafikVeriler {
-  final String dolulukYuzdeMetin;
-  final double dolulukYuzde;
+  final String seviyeMetin;
+  final double seviye;
   final charts.Color barColor;
 
-  TankGrafikVeriler({this.dolulukYuzdeMetin, this.dolulukYuzde, this.barColor});
+  TankGrafikVeriler({this.seviyeMetin, this.seviye, this.barColor});
 }

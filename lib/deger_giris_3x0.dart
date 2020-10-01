@@ -1,53 +1,52 @@
 import 'package:flutter/material.dart';
 
-class DegerGiris2X1 extends StatefulWidget {
+class DegerGiris3X0 extends StatefulWidget {
   int onlarX = 0;
   int birlerX = 0;
-  int ondalikX = 0;
+  int yuzlerX = 0;
   int index = 0;
   String baslik;
   String onBaslik;
 
-  DegerGiris2X1.Deger(
+  DegerGiris3X0.Deger(
+    int gelenYuzlerX,
     int gelenOnlarX,
     int gelenBirlerX,
-    int gelenOndalikX,
     int gelenIndex,
     String gelenBaslik,
     String gelenOnBaslik,
   ) {
     onlarX = gelenOnlarX;
     birlerX = gelenBirlerX;
-    ondalikX = gelenOndalikX;
+    yuzlerX = gelenYuzlerX;
     index = gelenIndex;
     baslik = gelenBaslik;
     onBaslik = gelenOnBaslik;
   }
 
   @override
-  _DegerGiris2X1State createState() => new _DegerGiris2X1State.Deger(
-      onlarX, birlerX,ondalikX, index, baslik,onBaslik);
+  _DegerGiris3X0State createState() => new _DegerGiris3X0State.Deger(
+      onlarX, birlerX,yuzlerX, index, baslik,onBaslik);
 }
 
-class _DegerGiris2X1State extends State<DegerGiris2X1> {
+class _DegerGiris3X0State extends State<DegerGiris3X0> {
   int onlarX = 0;
   int onlarX1 = 0;
   int birlerX = 0;
   int birlerX1 = 0;
-  int ondalikX = 0;
-  int ondalikX1 = 0;
+  int yuzlerX = 0;
+  int yuzlerX1 = 0;
   int index = 0;
   String baslik;
   String onBaslik;
 
-  _DegerGiris2X1State.Deger(int gelenOnlarX,gelenBirlerX,gelenOndalikX,gelenIndex,
-     String gelenBaslik,String gelenOnBaslik) {
+  _DegerGiris3X0State.Deger(int gelenOnlarX,gelenBirlerX,gelenYuzlerX,gelenIndex, String gelenBaslik,String gelenOnBaslik) {
     onlarX = gelenOnlarX;
     onlarX1 = gelenOnlarX;
     birlerX = gelenBirlerX;
     birlerX1 = gelenBirlerX;
-    ondalikX =  gelenOndalikX;
-    ondalikX1 = gelenOndalikX;
+    yuzlerX =  gelenYuzlerX;
+    yuzlerX1 = gelenYuzlerX;
     index = gelenIndex;
     baslik = gelenBaslik;
     onBaslik = gelenOnBaslik;
@@ -57,9 +56,9 @@ class _DegerGiris2X1State extends State<DegerGiris2X1> {
   Widget build(BuildContext context) {
     var oran = MediaQuery.of(context).size.width / 731.4;
     return AlertDialog(
-      titlePadding: EdgeInsets.only(top: 7*oran , bottom: 7*oran ),
+      titlePadding: EdgeInsets.only(top: 10 * oran, bottom: 10 * oran),
       shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(25*oran ))),
+          borderRadius: BorderRadius.all(Radius.circular(32.0 * oran))),
       backgroundColor: Colors.deepOrange.shade800,
       title: Container(
         alignment: Alignment.center,
@@ -70,20 +69,21 @@ class _DegerGiris2X1State extends State<DegerGiris2X1> {
               child: Column(
                 children: <Widget>[
                   Text(
-                    onBaslik+ baslik,
+                    onBaslik+baslik,
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                         fontFamily: 'Kelly Slab',
                         color: Colors.white,
-                        fontSize: 30,
                         fontWeight: FontWeight.bold),
                     textScaleFactor: oran,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
+
                       Padding(
                         padding:
-                            EdgeInsets.only(right: 10*oran , top: 5*oran ),
+                            EdgeInsets.only(right: 10 * oran, top: 5 * oran),
                         child: Column(
                           children: <Widget>[
                             RawMaterialButton(
@@ -91,9 +91,68 @@ class _DegerGiris2X1State extends State<DegerGiris2X1> {
                                   MaterialTapTargetSize.shrinkWrap,
                               constraints: BoxConstraints(),
                               padding: EdgeInsets.all(0),
-                              child: Image.asset(
-                                'assets/images/deger_artir_icon.png',
-                                scale: 4 / oran,
+                              child: RotatedBox(quarterTurns: 2,
+                                                              child: Icon(
+                                  Icons.arrow_drop_down_circle,
+                                  size: 40*oran,
+                                    color: Colors.white,
+                                ),
+                              ),
+                              onPressed: () {
+                                if (yuzlerX < 9)
+                                  yuzlerX++;
+                                else
+                                  yuzlerX = 0;
+
+                                setState(() {});
+                              },
+                            ),
+                            Text(
+                              yuzlerX.toString(),
+                              style: TextStyle(
+                                  fontSize: 50,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'Kelly Slab'),
+                              textScaleFactor: oran,
+                            ),
+                            RawMaterialButton(
+                              materialTapTargetSize:
+                                  MaterialTapTargetSize.shrinkWrap,
+                              constraints: BoxConstraints(),
+                              padding: EdgeInsets.all(0),
+                              child: Icon(
+                                Icons.arrow_drop_down_circle,
+                                size: 40*oran,
+                                  color: Colors.white,
+                              ),
+                              onPressed: () {
+                                if (yuzlerX > 0)
+                                  yuzlerX--;
+                                else
+                                  yuzlerX = 9;
+
+                                setState(() {});
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding:
+                            EdgeInsets.only(right: 10 * oran, top: 5 * oran),
+                        child: Column(
+                          children: <Widget>[
+                            RawMaterialButton(
+                              materialTapTargetSize:
+                                  MaterialTapTargetSize.shrinkWrap,
+                              constraints: BoxConstraints(),
+                              padding: EdgeInsets.all(0),
+                              child: RotatedBox(quarterTurns: 2,
+                                                              child: Icon(
+                                  Icons.arrow_drop_down_circle,
+                                  size: 40*oran,
+                                    color: Colors.white,
+                                ),
                               ),
                               onPressed: () {
                                 if (onlarX < 9)
@@ -117,9 +176,10 @@ class _DegerGiris2X1State extends State<DegerGiris2X1> {
                                   MaterialTapTargetSize.shrinkWrap,
                               constraints: BoxConstraints(),
                               padding: EdgeInsets.all(0),
-                              child: Image.asset(
-                                'assets/images/deger_dusur_icon.png',
-                                scale: 4 / oran,
+                              child: Icon(
+                                Icons.arrow_drop_down_circle,
+                                size: 40*oran,
+                                  color: Colors.white,
                               ),
                               onPressed: () {
                                 if (onlarX > 0)
@@ -135,7 +195,7 @@ class _DegerGiris2X1State extends State<DegerGiris2X1> {
                       ),
                       Padding(
                         padding:
-                            EdgeInsets.only(right: 10*oran , top: 5*oran ),
+                            EdgeInsets.only(right: 10 * oran, top: 5 * oran),
                         child: Column(
                           children: <Widget>[
                             RawMaterialButton(
@@ -143,9 +203,12 @@ class _DegerGiris2X1State extends State<DegerGiris2X1> {
                                   MaterialTapTargetSize.shrinkWrap,
                               constraints: BoxConstraints(),
                               padding: EdgeInsets.all(0),
-                              child: Image.asset(
-                                'assets/images/deger_artir_icon.png',
-                                scale: 4 / oran,
+                              child: RotatedBox(quarterTurns: 2,
+                                                              child: Icon(
+                                  Icons.arrow_drop_down_circle,
+                                  size: 40*oran,
+                                    color: Colors.white,
+                                ),
                               ),
                               onPressed: () {
                                 if (birlerX < 9)
@@ -169,9 +232,10 @@ class _DegerGiris2X1State extends State<DegerGiris2X1> {
                                   MaterialTapTargetSize.shrinkWrap,
                               constraints: BoxConstraints(),
                               padding: EdgeInsets.all(0),
-                              child: Image.asset(
-                                'assets/images/deger_dusur_icon.png',
-                                scale: 4 / oran,
+                              child: Icon(
+                                Icons.arrow_drop_down_circle,
+                                size: 40*oran,
+                                  color: Colors.white,
                               ),
                               onPressed: () {
                                 if (birlerX > 0)
@@ -185,60 +249,7 @@ class _DegerGiris2X1State extends State<DegerGiris2X1> {
                           ],
                         ),
                       ),
-                      Text(".",style: TextStyle(fontSize: 80,fontWeight: FontWeight.bold),),
-                      Padding(
-                        padding:
-                            EdgeInsets.only(right: 10*oran , top: 5*oran ),
-                        child: Column(
-                          children: <Widget>[
-                            RawMaterialButton(
-                              materialTapTargetSize:
-                                  MaterialTapTargetSize.shrinkWrap,
-                              constraints: BoxConstraints(),
-                              padding: EdgeInsets.all(0),
-                              child: Image.asset(
-                                'assets/images/deger_artir_icon.png',
-                                scale: 4 / oran,
-                              ),
-                              onPressed: () {
-                                if (ondalikX < 9)
-                                  ondalikX++;
-                                else
-                                  ondalikX = 0;
-
-                                setState(() {});
-                              },
-                            ),
-                            Text(
-                              ondalikX.toString(),
-                              style: TextStyle(
-                                  fontSize: 50,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Kelly Slab'),
-                              textScaleFactor: oran,
-                            ),
-                            RawMaterialButton(
-                              materialTapTargetSize:
-                                  MaterialTapTargetSize.shrinkWrap,
-                              constraints: BoxConstraints(),
-                              padding: EdgeInsets.all(0),
-                              child: Image.asset(
-                                'assets/images/deger_dusur_icon.png',
-                                scale: 4 / oran,
-                              ),
-                              onPressed: () {
-                                if (ondalikX > 0)
-                                  ondalikX--;
-                                else
-                                  ondalikX = 9;
-
-                                setState(() {});
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
-                      
+                        
                     ],
                   ),
                 ],
@@ -249,26 +260,26 @@ class _DegerGiris2X1State extends State<DegerGiris2X1> {
       ),
       actions: <Widget>[
         Container(
-          padding: EdgeInsets.only(bottom: 10*oran ),
+          padding: EdgeInsets.only(bottom: 10 * oran),
           alignment: Alignment.center,
-          width: 400*oran ,
+          width: 400 * oran,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Container(
-                margin: EdgeInsets.only(right: 20*oran ),
+                margin: EdgeInsets.only(right: 20 * oran),
                 child: RaisedButton(
                   color: Colors.indigo,
                   onPressed: () {
-                    var deger = [onlarX, birlerX, ondalikX, index];
+                    var deger = [yuzlerX,onlarX, birlerX, index];
                     Navigator.of(context).pop(deger);
                   },
                   child: Text(
                     "ONAY",
                     style: TextStyle(
                         color: Colors.white,
-                        fontSize: 25*oran ,
+                        fontSize: 25 * oran,
                         fontFamily: 'Audio wide'),
                   ),
                 ),
@@ -277,14 +288,14 @@ class _DegerGiris2X1State extends State<DegerGiris2X1> {
                 child: RaisedButton(
                   color: Colors.indigo,
                   onPressed: () {
-                    var deger = [onlarX1, birlerX1,ondalikX1, index];
+                    var deger = [yuzlerX1,onlarX1, birlerX1, index];
                     Navigator.of(context).pop(deger);
                   },
                   child: Text(
                     "ÇIKIŞ",
                     style: TextStyle(
                         color: Colors.white,
-                        fontSize: 25*oran ,
+                        fontSize: 25 * oran,
                         fontFamily: 'Audio wide'),
                   ),
                 ),
