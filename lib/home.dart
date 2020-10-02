@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:auto_size_text/auto_size_text.dart';
@@ -19,6 +20,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   String baglantiDurum = "";
+
+  String ipNo = "192.168.1.120";
 
   int _yuzler = 0;
   int _onlar = 0;
@@ -121,6 +124,8 @@ class _HomePageState extends State<HomePage> {
   bool grafikVisibility = true;
 
   String tolerans = "0";
+
+  List data;
 
   @override
   Widget build(BuildContext context) {
@@ -3104,7 +3109,24 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               )),
                         ),
-                        Spacer()
+
+                        Expanded(
+                          child: Container(
+                            child: Center(
+                              child: FutureBuilder(
+                                  future: DefaultAssetBundle.of(context)
+                                      .loadString("assets/data.json"),
+                                  builder: (context, snapshot) {
+                                    var mydata =
+                                        jsonDecode(snapshot.data.toString());
+                                    print(mydata["example_data"][0]["ip"]);
+                                    ipNo = (mydata["example_data"][0]["ip"])
+                                        .toString();
+                                    return Text(ipNo);
+                                  }),
+                            ),
+                          ),
+                        )
                       ],
                     ),
                   ),
@@ -3212,10 +3234,9 @@ class _HomePageState extends State<HomePage> {
 
     tolerans = degerler[63];
 
-
     if (t1OlcumAktif == "1") {
       t1ortalamadakiSensor[1] = true;
-    }else{
+    } else {
       t1ortalamadakiSensor[1] = false;
     }
 
@@ -3231,11 +3252,9 @@ class _HomePageState extends State<HomePage> {
       t1ortalamadakiSensor[3] = false;
     }
 
-
-
     if (t2OlcumAktif == "1") {
       t2ortalamadakiSensor[1] = true;
-    }else{
+    } else {
       t2ortalamadakiSensor[1] = false;
     }
 
@@ -3251,11 +3270,9 @@ class _HomePageState extends State<HomePage> {
       t2ortalamadakiSensor[3] = false;
     }
 
-
-
     if (t3OlcumAktif == "1") {
       t3ortalamadakiSensor[1] = true;
-    }else{
+    } else {
       t3ortalamadakiSensor[1] = false;
     }
 
@@ -3271,11 +3288,9 @@ class _HomePageState extends State<HomePage> {
       t3ortalamadakiSensor[3] = false;
     }
 
-
-
     if (t4OlcumAktif == "1") {
       t4ortalamadakiSensor[1] = true;
-    }else{
+    } else {
       t4ortalamadakiSensor[1] = false;
     }
 
@@ -3291,11 +3306,9 @@ class _HomePageState extends State<HomePage> {
       t4ortalamadakiSensor[3] = false;
     }
 
-
-
     if (t5OlcumAktif == "1") {
       t5ortalamadakiSensor[1] = true;
-    }else{
+    } else {
       t5ortalamadakiSensor[1] = false;
     }
 
@@ -3375,7 +3388,7 @@ class _HomePageState extends State<HomePage> {
 
     // =============================================================
     Socket _socket;
-    await Socket.connect("192.168.1.110", portNo, timeout: Duration(seconds: 5))
+    await Socket.connect(ipNo, portNo, timeout: Duration(seconds: 5))
         .then((Socket sock) {
       _socket = sock;
     }).then((_) {
@@ -3403,7 +3416,7 @@ class _HomePageState extends State<HomePage> {
 
     // =============================================================
     Socket _socket;
-    await Socket.connect("192.168.1.110", portNo, timeout: Duration(seconds: 5))
+    await Socket.connect(ipNo, portNo, timeout: Duration(seconds: 5))
         .then((Socket sock) {
       _socket = sock;
     }).then((_) {

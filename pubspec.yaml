@@ -59,6 +59,7 @@ flutter:
   
   - assets/images/deger_artir_icon.png
   - assets/images/deger_dusur_icon.png
+  - assets/data.json
   
 
   # To add assets to your application, add an assets section, like this:
