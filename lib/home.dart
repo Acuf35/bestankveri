@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> {
 
   bool adminYetki = true;
 
-  String ipNo = "192.168.1.110";
+  String ipNo = "192.168.1.90";
 
   int _yuzler = 0;
   int _onlar = 0;

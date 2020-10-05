@@ -763,7 +763,7 @@ class _TankGrafikState extends State<TankGrafik> {
 
     // =============================================================
     Socket _socket;
-    await Socket.connect("192.168.1.110", portNo, timeout: Duration(seconds: 5))
+    await Socket.connect("192.168.1.90", portNo, timeout: Duration(seconds: 5))
         .then((Socket sock) {
       _socket = sock;
     }).then((_) {
