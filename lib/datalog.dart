@@ -1153,203 +1153,286 @@ class _DatalogState extends State<Datalog> {
                                   //Kayıt no
                                   Expanded(
                                     flex: 1,
-                                    child: SizedBox(
-                                      child: Container(
-                                        child: AutoSizeText(
-                                          "KAYIT NO",
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                            decoration:
-                                                TextDecoration.underline,
+                                    child: Column(
+                                      children: [
+                                        Spacer(),
+                                        Expanded(flex: 2,
+                                          child: SizedBox(
+                                            child: Container(
+                                              alignment: Alignment.center,
+                                              child: AutoSizeText(
+                                                "KAYIT NO",
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                  fontSize: 20,
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold,
+                                                  decoration:
+                                                      TextDecoration.underline,
+                                                ),
+                                                maxLines: 1,
+                                              ),
+                                            ),
                                           ),
-                                          maxLines: 1,
                                         ),
-                                      ),
+                                        Spacer()
+                                      ],
                                     ),
                                   ),
                                   //ZAMAN
                                   Expanded(
                                     flex: 2,
-                                    child: SizedBox(
-                                      child: Container(
-                                        child: AutoSizeText(
-                                          "ZAMAN",
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                            decoration:
-                                                TextDecoration.underline,
+                                    child: Column(
+                                      children: [
+                                        Spacer(),
+                                        Expanded(flex: 2,
+                                          child: SizedBox(
+                                            child: Container(
+                                              alignment: Alignment.center,
+                                              child: AutoSizeText(
+                                                "ZAMAN",
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                  fontSize: 20,
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold,
+                                                  decoration:
+                                                      TextDecoration.underline,
+                                                ),
+                                                maxLines: 1,
+                                              ),
+                                            ),
                                           ),
-                                          maxLines: 1,
                                         ),
-                                      ),
+                                        Spacer()
+                                      ],
                                     ),
                                   ),
                                   //Ürün Tİpi
                                   Expanded(
                                     flex: 1,
-                                    child: SizedBox(
-                                      child: Container(
-                                        child: AutoSizeText(
-                                          "ÜRÜN TİPİ",
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                            decoration:
-                                                TextDecoration.underline,
+                                    child: Column(
+                                      children: [
+                                        Spacer(),
+                                        Expanded(flex: 2,
+                                          child: SizedBox(
+                                            child: Container(
+                                              alignment: Alignment.center,
+                                              child: AutoSizeText(
+                                                "ÜRÜN TİPİ",
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                  fontSize: 20,
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold,
+                                                  decoration:
+                                                      TextDecoration.underline,
+                                                ),
+                                                maxLines: 1,
+                                              ),
+                                            ),
                                           ),
-                                          maxLines: 1,
                                         ),
-                                      ),
+                                        Spacer()
+                                      ],
                                     ),
                                   ),
                                   //Seviye
                                   Expanded(
                                     flex: 1,
-                                    child: SizedBox(
-                                      child: Container(
-                                        child: AutoSizeText(
-                                          "SEVİYE",
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                            decoration:
-                                                TextDecoration.underline,
+                                    child: Column(
+                                      children: [
+                                        Spacer(),
+                                        Expanded(flex: 2,
+                                          child: SizedBox(
+                                            child: Container(
+                                              child: AutoSizeText(
+                                                "SEVİYE",
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                  fontSize: 20,
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold,
+                                                  decoration:
+                                                      TextDecoration.underline,
+                                                ),
+                                                maxLines: 1,
+                                              ),
+                                            ),
                                           ),
-                                          maxLines: 1,
                                         ),
-                                      ),
+                                        Spacer()
+                                      ],
                                     ),
                                   ),
 
                                   //Miktar
                                   Expanded(
                                     flex: 1,
-                                    child: SizedBox(
-                                      child: Container(
-                                        child: AutoSizeText(
-                                          "MİKTAR",
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                            decoration:
-                                                TextDecoration.underline,
+                                    child: Column(
+                                      children: [
+                                        Spacer(),
+                                        Expanded(flex: 2,
+                                          child: SizedBox(
+                                            child: Container(
+                                              child: AutoSizeText(
+                                                "MİKTAR",
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                  fontSize: 20,
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold,
+                                                  decoration:
+                                                      TextDecoration.underline,
+                                                ),
+                                                maxLines: 1,
+                                              ),
+                                            ),
                                           ),
-                                          maxLines: 1,
                                         ),
-                                      ),
+                                        Spacer()
+                                      ],
                                     ),
                                   ),
                                   //Sanal sensor
                                   Expanded(
                                     flex: 1,
-                                    child: SizedBox(
-                                      child: Container(
-                                        child: AutoSizeText(
-                                          "SAN.SEN.",
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                            decoration:
-                                                TextDecoration.underline,
+                                    child: Column(
+                                      children: [
+                                        Spacer(),
+                                        Expanded(flex: 2,
+                                          child: SizedBox(
+                                            child: Container(
+                                              child: AutoSizeText(
+                                                "SAN.SEN.",
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                  fontSize: 20,
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold,
+                                                  decoration:
+                                                      TextDecoration.underline,
+                                                ),
+                                                maxLines: 1,
+                                              ),
+                                            ),
                                           ),
-                                          maxLines: 1,
                                         ),
-                                      ),
+                                        Spacer()
+                                      ],
                                     ),
                                   ),
 
                                   //Sensör 1
                                   Expanded(
                                     flex: 1,
-                                    child: SizedBox(
-                                      child: Container(
-                                        child: AutoSizeText(
-                                          "SENS 1",
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                            decoration:
-                                                TextDecoration.underline,
+                                    child: Column(
+                                      children: [
+                                        Spacer(),
+                                        Expanded(flex: 2,
+                                          child: SizedBox(
+                                            child: Container(
+                                              child: AutoSizeText(
+                                                "SENS 1",
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                  fontSize: 20,
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold,
+                                                  decoration:
+                                                      TextDecoration.underline,
+                                                ),
+                                                maxLines: 1,
+                                              ),
+                                            ),
                                           ),
-                                          maxLines: 1,
                                         ),
-                                      ),
+                                        Spacer()
+                                      ],
                                     ),
                                   ),
                                   //Sensör 2
                                   Expanded(
                                     flex: 1,
-                                    child: SizedBox(
-                                      child: Container(
-                                        child: AutoSizeText(
-                                          "SENS 2",
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                            decoration:
-                                                TextDecoration.underline,
+                                    child: Column(
+                                      children: [
+                                        Spacer(),
+                                        Expanded(flex: 2,
+                                          child: SizedBox(
+                                            child: Container(
+                                              child: AutoSizeText(
+                                                "SENS 2",
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                  fontSize: 20,
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold,
+                                                  decoration:
+                                                      TextDecoration.underline,
+                                                ),
+                                                maxLines: 1,
+                                              ),
+                                            ),
                                           ),
-                                          maxLines: 1,
                                         ),
-                                      ),
+                                        Spacer()
+                                      ],
                                     ),
                                   ),
                                   //Sensör 3
                                   Expanded(
                                     flex: 1,
-                                    child: SizedBox(
-                                      child: Container(
-                                        child: AutoSizeText(
-                                          "SENS 3",
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                            decoration:
-                                                TextDecoration.underline,
+                                    child: Column(
+                                      children: [
+                                        Spacer(),
+                                        Expanded(flex: 2,
+                                          child: SizedBox(
+                                            child: Container(
+                                              child: AutoSizeText(
+                                                "SENS 3",
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                  fontSize: 20,
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold,
+                                                  decoration:
+                                                      TextDecoration.underline,
+                                                ),
+                                                maxLines: 1,
+                                              ),
+                                            ),
                                           ),
-                                          maxLines: 1,
                                         ),
-                                      ),
+                                        Spacer()
+                                      ],
                                     ),
                                   ),
                                   //Ortalama Sıcaklık
                                   Expanded(
                                     flex: 1,
-                                    child: SizedBox(
-                                      child: Container(
-                                        child: AutoSizeText(
-                                          "ORT.SIC.",
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                            decoration:
-                                                TextDecoration.underline,
+                                    child: Column(
+                                      children: [
+                                        Spacer(),
+                                        Expanded(flex: 2,
+                                          child: SizedBox(
+                                            child: Container(
+                                              child: AutoSizeText(
+                                                "ORT.SIC.",
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                  fontSize: 20,
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold,
+                                                  decoration:
+                                                      TextDecoration.underline,
+                                                ),
+                                                maxLines: 1,
+                                              ),
+                                            ),
                                           ),
-                                          maxLines: 1,
                                         ),
-                                      ),
+                                        Spacer()
+                                      ],
                                     ),
                                   ),
                                 ],
@@ -1587,7 +1670,7 @@ class _DatalogState extends State<Datalog> {
 
     // =============================================================
     Socket _socket;
-    await Socket.connect("192.168.1.120", portNo, timeout: Duration(seconds: 5))
+    await Socket.connect("192.168.1.110", portNo, timeout: Duration(seconds: 5))
         .then((Socket sock) {
       _socket = sock;
     }).then((_) {

@@ -11,6 +11,7 @@ import 'deger_giris_3x0.dart';
 
 class TankGrafik extends StatefulWidget {
   final List<TankGrafikVeriler> data;
+  bool tankYetki = false;
   String tankBaslik;
   String tankMiktar;
   String tankSen1;
@@ -31,6 +32,7 @@ class TankGrafik extends StatefulWidget {
   double oran;
   String tankManSeviye = "0";
   TankGrafik(
+      bool yetki,
       String baslik,
       String miktar,
       String sen1,
@@ -51,6 +53,7 @@ class TankGrafik extends StatefulWidget {
       double xOran,
       String manSeviye,
       {this.data}) {
+    tankYetki = yetki;
     tankBaslik = baslik;
     tankMiktar = miktar;
     tankSen1 = sen1;
@@ -175,9 +178,15 @@ class _TankGrafikState extends State<TankGrafik> {
                                           charts.TickSpec<num>(
                                               widget.tankSensSev1),
                                           charts.TickSpec<num>(
-                                              widget.tankSensSev2),
+                                              widget.tankSensSev2 -
+                                                  (widget.tankIndex == 5
+                                                      ? 0.3
+                                                      : 0.26)),
                                           charts.TickSpec<num>(
-                                              widget.tankSensSev3),
+                                              widget.tankSensSev3 -
+                                                  (widget.tankIndex == 5
+                                                      ? 0.3
+                                                      : 0.26)),
                                           //charts.TickSpec<num>(75),
                                           charts.TickSpec<num>(
                                               widget.tankIndex == 5
@@ -432,30 +441,38 @@ class _TankGrafikState extends State<TankGrafik> {
                                                       left: 5, right: 5),
                                                   child: RawMaterialButton(
                                                     onPressed: () {
-                                                      String xx =
-                                                          widget.tankSanSen;
-                                                      var yy = xx.split(".");
-                                                      _yuzler =
-                                                          int.parse(yy[0]) ~/
-                                                              100;
-                                                      _onlar =
-                                                          (int.parse(yy[0]) -
-                                                                  _yuzler *
-                                                                      100) ~/
-                                                              10;
-                                                      _birler =
-                                                          int.parse(yy[0]) % 10;
-                                                      _ondalik =
-                                                          int.parse(yy[1]);
-                                                      _degergiris3X1(
-                                                              _yuzler,
-                                                              _onlar,
-                                                              _birler,
-                                                              _ondalik,
-                                                              widget.tankIndex,
-                                                              "Sanal Sensor",
-                                                              "Tank ${widget.tankIndex} ")
-                                                          .then((onValue) {});
+                                                      if (widget.tankYetki) {
+                                                        String xx =
+                                                            widget.tankSanSen;
+                                                        var yy = xx.split(".");
+                                                        _yuzler =
+                                                            int.parse(yy[0]) ~/
+                                                                100;
+                                                        _onlar =
+                                                            (int.parse(yy[0]) -
+                                                                    _yuzler *
+                                                                        100) ~/
+                                                                10;
+                                                        _birler =
+                                                            int.parse(yy[0]) %
+                                                                10;
+                                                        _ondalik =
+                                                            int.parse(yy[1]);
+                                                        _degergiris3X1(
+                                                                _yuzler,
+                                                                _onlar,
+                                                                _birler,
+                                                                _ondalik,
+                                                                widget
+                                                                    .tankIndex,
+                                                                "Sanal Sensor",
+                                                                "Tank ${widget.tankIndex} ")
+                                                            .then((onValue) {});
+                                                      } else {
+                                                        Toast.show(
+                                                            "Değişiklik yapma yetkiniz bulunmamaktadır.",
+                                                            context);
+                                                      }
                                                     },
                                                     fillColor: Colors.orange,
                                                     child: SizedBox(
@@ -485,7 +502,9 @@ class _TankGrafikState extends State<TankGrafik> {
                                       //Man Mesafe
                                       Expanded(
                                         child: Visibility(
-                                          visible: widget.tankManSevVisibility && widget.tankYagVarmi,
+                                          visible:
+                                              widget.tankManSevVisibility &&
+                                                  widget.tankYagVarmi,
                                           child: Column(
                                             children: [
                                               Expanded(
@@ -513,29 +532,37 @@ class _TankGrafikState extends State<TankGrafik> {
                                                       left: 5, right: 5),
                                                   child: RawMaterialButton(
                                                     onPressed: () {
-                                                      String xx =
-                                                          widget.tankManSeviye;
-                                                      int sayi = int.parse(xx);
-                                                      _yuzler = sayi < 100
-                                                          ? 0
-                                                          : sayi ~/ 100;
-                                                      _onlar = sayi < 10
-                                                          ? 0
-                                                          : (sayi > 99
-                                                              ? (sayi -
-                                                                      100 *
-                                                                          _yuzler) ~/
-                                                                  10
-                                                              : sayi ~/ 10);
-                                                      _birler = sayi % 10;
-                                                      _degergiris3X0(
-                                                              _yuzler,
-                                                              _onlar,
-                                                              _birler,
-                                                              widget.tankIndex,
-                                                              "Manuel Seviye",
-                                                              "Tank ${widget.tankIndex} ")
-                                                          .then((onValue) {});
+                                                      if (widget.tankYetki) {
+                                                        String xx = widget
+                                                            .tankManSeviye;
+                                                        int sayi =
+                                                            int.parse(xx);
+                                                        _yuzler = sayi < 100
+                                                            ? 0
+                                                            : sayi ~/ 100;
+                                                        _onlar = sayi < 10
+                                                            ? 0
+                                                            : (sayi > 99
+                                                                ? (sayi -
+                                                                        100 *
+                                                                            _yuzler) ~/
+                                                                    10
+                                                                : sayi ~/ 10);
+                                                        _birler = sayi % 10;
+                                                        _degergiris3X0(
+                                                                _yuzler,
+                                                                _onlar,
+                                                                _birler,
+                                                                widget
+                                                                    .tankIndex,
+                                                                "Manuel Seviye",
+                                                                "Tank ${widget.tankIndex} ")
+                                                            .then((onValue) {});
+                                                      } else {
+                                                        Toast.show(
+                                                            "Değişiklik yapma yetkiniz bulunmamaktadır.",
+                                                            context);
+                                                      }
                                                     },
                                                     fillColor: Colors.lime,
                                                     child: SizedBox(
@@ -736,7 +763,7 @@ class _TankGrafikState extends State<TankGrafik> {
 
     // =============================================================
     Socket _socket;
-    await Socket.connect("192.168.1.120", portNo, timeout: Duration(seconds: 5))
+    await Socket.connect("192.168.1.110", portNo, timeout: Duration(seconds: 5))
         .then((Socket sock) {
       _socket = sock;
     }).then((_) {

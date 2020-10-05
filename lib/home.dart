@@ -21,7 +21,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   String baglantiDurum = "";
 
-  String ipNo = "192.168.1.120";
+  bool adminYetki = false;
+
+  String ipNo = "192.168.1.110";
 
   int _yuzler = 0;
   int _onlar = 0;
@@ -246,6 +248,7 @@ class _HomePageState extends State<HomePage> {
                               child: Visibility(
                             visible: grafikVisibility,
                             child: TankGrafik(
+                              adminYetki,
                               "TANK 1",
                               "$agirlikT1 Kg",
                               t1sens1,
@@ -272,6 +275,7 @@ class _HomePageState extends State<HomePage> {
                               child: Visibility(
                             visible: grafikVisibility,
                             child: TankGrafik(
+                              adminYetki,
                               "TANK 2",
                               "$agirlikT2 Kg",
                               t2sens1,
@@ -298,6 +302,7 @@ class _HomePageState extends State<HomePage> {
                               child: Visibility(
                             visible: grafikVisibility,
                             child: TankGrafik(
+                              adminYetki,
                               "TANK 3",
                               "$agirlikT3 Kg",
                               t3sens1,
@@ -324,6 +329,7 @@ class _HomePageState extends State<HomePage> {
                               child: Visibility(
                             visible: grafikVisibility,
                             child: TankGrafik(
+                              adminYetki,
                               "TANK 4",
                               "$agirlikT4 Kg",
                               t4sens1,
@@ -350,6 +356,7 @@ class _HomePageState extends State<HomePage> {
                               child: Visibility(
                             visible: grafikVisibility,
                             child: TankGrafik(
+                              adminYetki,
                               "TANK 5",
                               "$agirlikT5 Kg",
                               t5sens1,
@@ -404,29 +411,34 @@ class _HomePageState extends State<HomePage> {
                                                 constraints: BoxConstraints(
                                                     minWidth: double.infinity),
                                                 onPressed: () {
-                                                  t1UrunTipi = "1";
+                                                  if (adminYetki) {
+                                                    t1UrunTipi = "1";
 
-                                                  yazmaSonrasiGecikmeSayaci = 0;
-                                                  String komut =
-                                                      "1*1*$t1UrunTipi";
-                                                  veriGonder(komut, 3000)
-                                                      .then((value) {
-                                                    if (value.split("*")[0] ==
-                                                        "error") {
-                                                      Toast.show(
-                                                          "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
-                                                          context,
-                                                          duration: 3);
-                                                    } else {
-                                                      Toast.show(
-                                                          "Başarılı", context,
-                                                          duration: 3);
+                                                    yazmaSonrasiGecikmeSayaci =
+                                                        0;
+                                                    String komut =
+                                                        "1*1*$t1UrunTipi";
+                                                    veriGonder(komut, 3000)
+                                                        .then((value) {
+                                                      if (value.split("*")[0] ==
+                                                          "error") {
+                                                        Toast.show(
+                                                            "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
+                                                            context,
+                                                            duration: 3);
+                                                      } else {
+                                                        Toast.show(
+                                                            "Başarılı", context,
+                                                            duration: 3);
 
-                                                      baglanti = false;
-                                                    }
-                                                  });
+                                                        baglanti = false;
+                                                      }
+                                                    });
 
-                                                  setState(() {});
+                                                    setState(() {});
+                                                  }else{
+                                                    Toast.show("Değişiklik yapma yetkiniz bulunmamaktadır.", context);
+                                                  }
                                                 },
                                                 fillColor: t1UrunTipi == "1"
                                                     ? Colors.green
@@ -470,29 +482,34 @@ class _HomePageState extends State<HomePage> {
                                                 constraints: BoxConstraints(
                                                     minWidth: double.infinity),
                                                 onPressed: () {
-                                                  t1UrunTipi = "2";
+                                                  if (adminYetki) {
+                                                    t1UrunTipi = "2";
 
-                                                  yazmaSonrasiGecikmeSayaci = 0;
-                                                  String komut =
-                                                      "1*1*$t1UrunTipi";
-                                                  veriGonder(komut, 3000)
-                                                      .then((value) {
-                                                    if (value.split("*")[0] ==
-                                                        "error") {
-                                                      Toast.show(
-                                                          "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
-                                                          context,
-                                                          duration: 3);
-                                                    } else {
-                                                      Toast.show(
-                                                          "Başarılı", context,
-                                                          duration: 3);
+                                                    yazmaSonrasiGecikmeSayaci =
+                                                        0;
+                                                    String komut =
+                                                        "1*1*$t1UrunTipi";
+                                                    veriGonder(komut, 3000)
+                                                        .then((value) {
+                                                      if (value.split("*")[0] ==
+                                                          "error") {
+                                                        Toast.show(
+                                                            "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
+                                                            context,
+                                                            duration: 3);
+                                                      } else {
+                                                        Toast.show(
+                                                            "Başarılı", context,
+                                                            duration: 3);
 
-                                                      baglanti = false;
-                                                    }
-                                                  });
+                                                        baglanti = false;
+                                                      }
+                                                    });
 
-                                                  setState(() {});
+                                                    setState(() {});
+                                                  }else{
+                                                    Toast.show("Değişiklik yapma yetkiniz bulunmamaktadır.", context);
+                                                  }
                                                 },
                                                 fillColor: t1UrunTipi == "2"
                                                     ? Colors.green
@@ -545,29 +562,34 @@ class _HomePageState extends State<HomePage> {
                                                 constraints: BoxConstraints(
                                                     minWidth: double.infinity),
                                                 onPressed: () {
-                                                  t1UrunTipi = "3";
+                                                  if (adminYetki) {
+                                                    t1UrunTipi = "3";
 
-                                                  yazmaSonrasiGecikmeSayaci = 0;
-                                                  String komut =
-                                                      "1*1*$t1UrunTipi";
-                                                  veriGonder(komut, 3000)
-                                                      .then((value) {
-                                                    if (value.split("*")[0] ==
-                                                        "error") {
-                                                      Toast.show(
-                                                          "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
-                                                          context,
-                                                          duration: 3);
-                                                    } else {
-                                                      Toast.show(
-                                                          "Başarılı", context,
-                                                          duration: 3);
+                                                    yazmaSonrasiGecikmeSayaci =
+                                                        0;
+                                                    String komut =
+                                                        "1*1*$t1UrunTipi";
+                                                    veriGonder(komut, 3000)
+                                                        .then((value) {
+                                                      if (value.split("*")[0] ==
+                                                          "error") {
+                                                        Toast.show(
+                                                            "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
+                                                            context,
+                                                            duration: 3);
+                                                      } else {
+                                                        Toast.show(
+                                                            "Başarılı", context,
+                                                            duration: 3);
 
-                                                      baglanti = false;
-                                                    }
-                                                  });
+                                                        baglanti = false;
+                                                      }
+                                                    });
 
-                                                  setState(() {});
+                                                    setState(() {});
+                                                  }else{
+                                                    Toast.show("Değişiklik yapma yetkiniz bulunmamaktadır.", context);
+                                                  }
                                                 },
                                                 fillColor: t1UrunTipi == "3"
                                                     ? Colors.green
@@ -584,6 +606,7 @@ class _HomePageState extends State<HomePage> {
                                                           fontWeight:
                                                               FontWeight.bold),
                                                       maxLines: 1,
+                                                      minFontSize: 2,
                                                       textAlign:
                                                           TextAlign.center,
                                                     ),
@@ -611,29 +634,34 @@ class _HomePageState extends State<HomePage> {
                                                 constraints: BoxConstraints(
                                                     minWidth: double.infinity),
                                                 onPressed: () {
-                                                  t1UrunTipi = "4";
+                                                  if (adminYetki) {
+                                                    t1UrunTipi = "4";
 
-                                                  yazmaSonrasiGecikmeSayaci = 0;
-                                                  String komut =
-                                                      "1*1*$t1UrunTipi";
-                                                  veriGonder(komut, 3000)
-                                                      .then((value) {
-                                                    if (value.split("*")[0] ==
-                                                        "error") {
-                                                      Toast.show(
-                                                          "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
-                                                          context,
-                                                          duration: 3);
-                                                    } else {
-                                                      Toast.show(
-                                                          "Başarılı", context,
-                                                          duration: 3);
+                                                    yazmaSonrasiGecikmeSayaci =
+                                                        0;
+                                                    String komut =
+                                                        "1*1*$t1UrunTipi";
+                                                    veriGonder(komut, 3000)
+                                                        .then((value) {
+                                                      if (value.split("*")[0] ==
+                                                          "error") {
+                                                        Toast.show(
+                                                            "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
+                                                            context,
+                                                            duration: 3);
+                                                      } else {
+                                                        Toast.show(
+                                                            "Başarılı", context,
+                                                            duration: 3);
 
-                                                      baglanti = false;
-                                                    }
-                                                  });
+                                                        baglanti = false;
+                                                      }
+                                                    });
 
-                                                  setState(() {});
+                                                    setState(() {});
+                                                  }else{
+                                                    Toast.show("Değişiklik yapma yetkiniz bulunmamaktadır.", context);
+                                                  }
                                                 },
                                                 fillColor: t1UrunTipi == "4"
                                                     ? Colors.green
@@ -692,29 +720,34 @@ class _HomePageState extends State<HomePage> {
                                                 constraints: BoxConstraints(
                                                     minWidth: double.infinity),
                                                 onPressed: () {
-                                                  t2UrunTipi = "1";
+                                                  if (adminYetki) {
+                                                    t2UrunTipi = "1";
 
-                                                  yazmaSonrasiGecikmeSayaci = 0;
-                                                  String komut =
-                                                      "1*2*$t2UrunTipi";
-                                                  veriGonder(komut, 3000)
-                                                      .then((value) {
-                                                    if (value.split("*")[0] ==
-                                                        "error") {
-                                                      Toast.show(
-                                                          "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
-                                                          context,
-                                                          duration: 3);
-                                                    } else {
-                                                      Toast.show(
-                                                          "Başarılı", context,
-                                                          duration: 3);
+                                                    yazmaSonrasiGecikmeSayaci =
+                                                        0;
+                                                    String komut =
+                                                        "1*2*$t2UrunTipi";
+                                                    veriGonder(komut, 3000)
+                                                        .then((value) {
+                                                      if (value.split("*")[0] ==
+                                                          "error") {
+                                                        Toast.show(
+                                                            "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
+                                                            context,
+                                                            duration: 3);
+                                                      } else {
+                                                        Toast.show(
+                                                            "Başarılı", context,
+                                                            duration: 3);
 
-                                                      baglanti = false;
-                                                    }
-                                                  });
+                                                        baglanti = false;
+                                                      }
+                                                    });
 
-                                                  setState(() {});
+                                                    setState(() {});
+                                                  }else{
+                                                    Toast.show("Değişiklik yapma yetkiniz bulunmamaktadır.", context);
+                                                  }
                                                 },
                                                 fillColor: t2UrunTipi == "1"
                                                     ? Colors.green
@@ -758,29 +791,34 @@ class _HomePageState extends State<HomePage> {
                                                 constraints: BoxConstraints(
                                                     minWidth: double.infinity),
                                                 onPressed: () {
-                                                  t2UrunTipi = "2";
+                                                  if (adminYetki) {
+                                                    t2UrunTipi = "2";
 
-                                                  yazmaSonrasiGecikmeSayaci = 0;
-                                                  String komut =
-                                                      "1*2*$t2UrunTipi";
-                                                  veriGonder(komut, 3000)
-                                                      .then((value) {
-                                                    if (value.split("*")[0] ==
-                                                        "error") {
-                                                      Toast.show(
-                                                          "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
-                                                          context,
-                                                          duration: 3);
-                                                    } else {
-                                                      Toast.show(
-                                                          "Başarılı", context,
-                                                          duration: 3);
+                                                    yazmaSonrasiGecikmeSayaci =
+                                                        0;
+                                                    String komut =
+                                                        "1*2*$t2UrunTipi";
+                                                    veriGonder(komut, 3000)
+                                                        .then((value) {
+                                                      if (value.split("*")[0] ==
+                                                          "error") {
+                                                        Toast.show(
+                                                            "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
+                                                            context,
+                                                            duration: 3);
+                                                      } else {
+                                                        Toast.show(
+                                                            "Başarılı", context,
+                                                            duration: 3);
 
-                                                      baglanti = false;
-                                                    }
-                                                  });
+                                                        baglanti = false;
+                                                      }
+                                                    });
 
-                                                  setState(() {});
+                                                    setState(() {});
+                                                  }else{
+                                                    Toast.show("Değişiklik yapma yetkiniz bulunmamaktadır.", context);
+                                                  }
                                                 },
                                                 fillColor: t2UrunTipi == "2"
                                                     ? Colors.green
@@ -833,29 +871,34 @@ class _HomePageState extends State<HomePage> {
                                                 constraints: BoxConstraints(
                                                     minWidth: double.infinity),
                                                 onPressed: () {
-                                                  t2UrunTipi = "3";
+                                                  if (adminYetki) {
+                                                    t2UrunTipi = "3";
 
-                                                  yazmaSonrasiGecikmeSayaci = 0;
-                                                  String komut =
-                                                      "1*2*$t2UrunTipi";
-                                                  veriGonder(komut, 3000)
-                                                      .then((value) {
-                                                    if (value.split("*")[0] ==
-                                                        "error") {
-                                                      Toast.show(
-                                                          "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
-                                                          context,
-                                                          duration: 3);
-                                                    } else {
-                                                      Toast.show(
-                                                          "Başarılı", context,
-                                                          duration: 3);
+                                                    yazmaSonrasiGecikmeSayaci =
+                                                        0;
+                                                    String komut =
+                                                        "1*2*$t2UrunTipi";
+                                                    veriGonder(komut, 3000)
+                                                        .then((value) {
+                                                      if (value.split("*")[0] ==
+                                                          "error") {
+                                                        Toast.show(
+                                                            "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
+                                                            context,
+                                                            duration: 3);
+                                                      } else {
+                                                        Toast.show(
+                                                            "Başarılı", context,
+                                                            duration: 3);
 
-                                                      baglanti = false;
-                                                    }
-                                                  });
+                                                        baglanti = false;
+                                                      }
+                                                    });
 
-                                                  setState(() {});
+                                                    setState(() {});
+                                                  }else{
+                                                    Toast.show("Değişiklik yapma yetkiniz bulunmamaktadır.", context);
+                                                  }
                                                 },
                                                 fillColor: t2UrunTipi == "3"
                                                     ? Colors.green
@@ -899,29 +942,34 @@ class _HomePageState extends State<HomePage> {
                                                 constraints: BoxConstraints(
                                                     minWidth: double.infinity),
                                                 onPressed: () {
-                                                  t2UrunTipi = "4";
+                                                  if (adminYetki) {
+                                                    t2UrunTipi = "4";
 
-                                                  yazmaSonrasiGecikmeSayaci = 0;
-                                                  String komut =
-                                                      "1*2*$t2UrunTipi";
-                                                  veriGonder(komut, 3000)
-                                                      .then((value) {
-                                                    if (value.split("*")[0] ==
-                                                        "error") {
-                                                      Toast.show(
-                                                          "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
-                                                          context,
-                                                          duration: 3);
-                                                    } else {
-                                                      Toast.show(
-                                                          "Başarılı", context,
-                                                          duration: 3);
+                                                    yazmaSonrasiGecikmeSayaci =
+                                                        0;
+                                                    String komut =
+                                                        "1*2*$t2UrunTipi";
+                                                    veriGonder(komut, 3000)
+                                                        .then((value) {
+                                                      if (value.split("*")[0] ==
+                                                          "error") {
+                                                        Toast.show(
+                                                            "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
+                                                            context,
+                                                            duration: 3);
+                                                      } else {
+                                                        Toast.show(
+                                                            "Başarılı", context,
+                                                            duration: 3);
 
-                                                      baglanti = false;
-                                                    }
-                                                  });
+                                                        baglanti = false;
+                                                      }
+                                                    });
 
-                                                  setState(() {});
+                                                    setState(() {});
+                                                  }else{
+                                                    Toast.show("Değişiklik yapma yetkiniz bulunmamaktadır.", context);
+                                                  }
                                                 },
                                                 fillColor: t2UrunTipi == "4"
                                                     ? Colors.green
@@ -980,29 +1028,34 @@ class _HomePageState extends State<HomePage> {
                                                 constraints: BoxConstraints(
                                                     minWidth: double.infinity),
                                                 onPressed: () {
-                                                  t3UrunTipi = "1";
+                                                  if (adminYetki) {
+                                                    t3UrunTipi = "1";
 
-                                                  yazmaSonrasiGecikmeSayaci = 0;
-                                                  String komut =
-                                                      "1*3*$t3UrunTipi";
-                                                  veriGonder(komut, 3000)
-                                                      .then((value) {
-                                                    if (value.split("*")[0] ==
-                                                        "error") {
-                                                      Toast.show(
-                                                          "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
-                                                          context,
-                                                          duration: 3);
-                                                    } else {
-                                                      Toast.show(
-                                                          "Başarılı", context,
-                                                          duration: 3);
+                                                    yazmaSonrasiGecikmeSayaci =
+                                                        0;
+                                                    String komut =
+                                                        "1*3*$t3UrunTipi";
+                                                    veriGonder(komut, 3000)
+                                                        .then((value) {
+                                                      if (value.split("*")[0] ==
+                                                          "error") {
+                                                        Toast.show(
+                                                            "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
+                                                            context,
+                                                            duration: 3);
+                                                      } else {
+                                                        Toast.show(
+                                                            "Başarılı", context,
+                                                            duration: 3);
 
-                                                      baglanti = false;
-                                                    }
-                                                  });
+                                                        baglanti = false;
+                                                      }
+                                                    });
 
-                                                  setState(() {});
+                                                    setState(() {});
+                                                  }else{
+                                                    Toast.show("Değişiklik yapma yetkiniz bulunmamaktadır.", context);
+                                                  }
                                                 },
                                                 fillColor: t3UrunTipi == "1"
                                                     ? Colors.green
@@ -1046,29 +1099,34 @@ class _HomePageState extends State<HomePage> {
                                                 constraints: BoxConstraints(
                                                     minWidth: double.infinity),
                                                 onPressed: () {
-                                                  t3UrunTipi = "2";
+                                                  if (adminYetki) {
+                                                    t3UrunTipi = "2";
 
-                                                  yazmaSonrasiGecikmeSayaci = 0;
-                                                  String komut =
-                                                      "1*3*$t3UrunTipi";
-                                                  veriGonder(komut, 3000)
-                                                      .then((value) {
-                                                    if (value.split("*")[0] ==
-                                                        "error") {
-                                                      Toast.show(
-                                                          "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
-                                                          context,
-                                                          duration: 3);
-                                                    } else {
-                                                      Toast.show(
-                                                          "Başarılı", context,
-                                                          duration: 3);
+                                                    yazmaSonrasiGecikmeSayaci =
+                                                        0;
+                                                    String komut =
+                                                        "1*3*$t3UrunTipi";
+                                                    veriGonder(komut, 3000)
+                                                        .then((value) {
+                                                      if (value.split("*")[0] ==
+                                                          "error") {
+                                                        Toast.show(
+                                                            "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
+                                                            context,
+                                                            duration: 3);
+                                                      } else {
+                                                        Toast.show(
+                                                            "Başarılı", context,
+                                                            duration: 3);
 
-                                                      baglanti = false;
-                                                    }
-                                                  });
+                                                        baglanti = false;
+                                                      }
+                                                    });
 
-                                                  setState(() {});
+                                                    setState(() {});
+                                                  }else{
+                                                    Toast.show("Değişiklik yapma yetkiniz bulunmamaktadır.", context);
+                                                  }
                                                 },
                                                 fillColor: t3UrunTipi == "2"
                                                     ? Colors.green
@@ -1121,29 +1179,34 @@ class _HomePageState extends State<HomePage> {
                                                 constraints: BoxConstraints(
                                                     minWidth: double.infinity),
                                                 onPressed: () {
-                                                  t3UrunTipi = "3";
+                                                  if (adminYetki) {
+                                                    t3UrunTipi = "3";
 
-                                                  yazmaSonrasiGecikmeSayaci = 0;
-                                                  String komut =
-                                                      "1*3*$t3UrunTipi";
-                                                  veriGonder(komut, 3000)
-                                                      .then((value) {
-                                                    if (value.split("*")[0] ==
-                                                        "error") {
-                                                      Toast.show(
-                                                          "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
-                                                          context,
-                                                          duration: 3);
-                                                    } else {
-                                                      Toast.show(
-                                                          "Başarılı", context,
-                                                          duration: 3);
+                                                    yazmaSonrasiGecikmeSayaci =
+                                                        0;
+                                                    String komut =
+                                                        "1*3*$t3UrunTipi";
+                                                    veriGonder(komut, 3000)
+                                                        .then((value) {
+                                                      if (value.split("*")[0] ==
+                                                          "error") {
+                                                        Toast.show(
+                                                            "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
+                                                            context,
+                                                            duration: 3);
+                                                      } else {
+                                                        Toast.show(
+                                                            "Başarılı", context,
+                                                            duration: 3);
 
-                                                      baglanti = false;
-                                                    }
-                                                  });
+                                                        baglanti = false;
+                                                      }
+                                                    });
 
-                                                  setState(() {});
+                                                    setState(() {});
+                                                  }else{
+                                                    Toast.show("Değişiklik yapma yetkiniz bulunmamaktadır.", context);
+                                                  }
                                                 },
                                                 fillColor: t3UrunTipi == "3"
                                                     ? Colors.green
@@ -1187,29 +1250,34 @@ class _HomePageState extends State<HomePage> {
                                                 constraints: BoxConstraints(
                                                     minWidth: double.infinity),
                                                 onPressed: () {
-                                                  t3UrunTipi = "4";
+                                                  if (adminYetki) {
+                                                    t3UrunTipi = "4";
 
-                                                  yazmaSonrasiGecikmeSayaci = 0;
-                                                  String komut =
-                                                      "1*3*$t3UrunTipi";
-                                                  veriGonder(komut, 3000)
-                                                      .then((value) {
-                                                    if (value.split("*")[0] ==
-                                                        "error") {
-                                                      Toast.show(
-                                                          "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
-                                                          context,
-                                                          duration: 3);
-                                                    } else {
-                                                      Toast.show(
-                                                          "Başarılı", context,
-                                                          duration: 3);
+                                                    yazmaSonrasiGecikmeSayaci =
+                                                        0;
+                                                    String komut =
+                                                        "1*3*$t3UrunTipi";
+                                                    veriGonder(komut, 3000)
+                                                        .then((value) {
+                                                      if (value.split("*")[0] ==
+                                                          "error") {
+                                                        Toast.show(
+                                                            "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
+                                                            context,
+                                                            duration: 3);
+                                                      } else {
+                                                        Toast.show(
+                                                            "Başarılı", context,
+                                                            duration: 3);
 
-                                                      baglanti = false;
-                                                    }
-                                                  });
+                                                        baglanti = false;
+                                                      }
+                                                    });
 
-                                                  setState(() {});
+                                                    setState(() {});
+                                                  }else{
+                                                    Toast.show("Değişiklik yapma yetkiniz bulunmamaktadır.", context);
+                                                  }
                                                 },
                                                 fillColor: t3UrunTipi == "4"
                                                     ? Colors.green
@@ -1268,29 +1336,34 @@ class _HomePageState extends State<HomePage> {
                                                 constraints: BoxConstraints(
                                                     minWidth: double.infinity),
                                                 onPressed: () {
-                                                  t4UrunTipi = "1";
+                                                  if (adminYetki) {
+                                                    t4UrunTipi = "1";
 
-                                                  yazmaSonrasiGecikmeSayaci = 0;
-                                                  String komut =
-                                                      "1*4*$t4UrunTipi";
-                                                  veriGonder(komut, 3000)
-                                                      .then((value) {
-                                                    if (value.split("*")[0] ==
-                                                        "error") {
-                                                      Toast.show(
-                                                          "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
-                                                          context,
-                                                          duration: 3);
-                                                    } else {
-                                                      Toast.show(
-                                                          "Başarılı", context,
-                                                          duration: 3);
+                                                    yazmaSonrasiGecikmeSayaci =
+                                                        0;
+                                                    String komut =
+                                                        "1*4*$t4UrunTipi";
+                                                    veriGonder(komut, 3000)
+                                                        .then((value) {
+                                                      if (value.split("*")[0] ==
+                                                          "error") {
+                                                        Toast.show(
+                                                            "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
+                                                            context,
+                                                            duration: 3);
+                                                      } else {
+                                                        Toast.show(
+                                                            "Başarılı", context,
+                                                            duration: 3);
 
-                                                      baglanti = false;
-                                                    }
-                                                  });
+                                                        baglanti = false;
+                                                      }
+                                                    });
 
-                                                  setState(() {});
+                                                    setState(() {});
+                                                  }else{
+                                                    Toast.show("Değişiklik yapma yetkiniz bulunmamaktadır.", context);
+                                                  }
                                                 },
                                                 fillColor: t4UrunTipi == "1"
                                                     ? Colors.green
@@ -1334,29 +1407,34 @@ class _HomePageState extends State<HomePage> {
                                                 constraints: BoxConstraints(
                                                     minWidth: double.infinity),
                                                 onPressed: () {
-                                                  t4UrunTipi = "2";
+                                                  if (adminYetki) {
+                                                    t4UrunTipi = "2";
 
-                                                  yazmaSonrasiGecikmeSayaci = 0;
-                                                  String komut =
-                                                      "1*4*$t4UrunTipi";
-                                                  veriGonder(komut, 3000)
-                                                      .then((value) {
-                                                    if (value.split("*")[0] ==
-                                                        "error") {
-                                                      Toast.show(
-                                                          "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
-                                                          context,
-                                                          duration: 3);
-                                                    } else {
-                                                      Toast.show(
-                                                          "Başarılı", context,
-                                                          duration: 3);
+                                                    yazmaSonrasiGecikmeSayaci =
+                                                        0;
+                                                    String komut =
+                                                        "1*4*$t4UrunTipi";
+                                                    veriGonder(komut, 3000)
+                                                        .then((value) {
+                                                      if (value.split("*")[0] ==
+                                                          "error") {
+                                                        Toast.show(
+                                                            "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
+                                                            context,
+                                                            duration: 3);
+                                                      } else {
+                                                        Toast.show(
+                                                            "Başarılı", context,
+                                                            duration: 3);
 
-                                                      baglanti = false;
-                                                    }
-                                                  });
+                                                        baglanti = false;
+                                                      }
+                                                    });
 
-                                                  setState(() {});
+                                                    setState(() {});
+                                                  }else{
+                                                    Toast.show("Değişiklik yapma yetkiniz bulunmamaktadır.", context);
+                                                  }
                                                 },
                                                 fillColor: t4UrunTipi == "2"
                                                     ? Colors.green
@@ -1409,29 +1487,34 @@ class _HomePageState extends State<HomePage> {
                                                 constraints: BoxConstraints(
                                                     minWidth: double.infinity),
                                                 onPressed: () {
-                                                  t4UrunTipi = "3";
+                                                  if (adminYetki) {
+                                                    t4UrunTipi = "3";
 
-                                                  yazmaSonrasiGecikmeSayaci = 0;
-                                                  String komut =
-                                                      "1*4*$t4UrunTipi";
-                                                  veriGonder(komut, 3000)
-                                                      .then((value) {
-                                                    if (value.split("*")[0] ==
-                                                        "error") {
-                                                      Toast.show(
-                                                          "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
-                                                          context,
-                                                          duration: 3);
-                                                    } else {
-                                                      Toast.show(
-                                                          "Başarılı", context,
-                                                          duration: 3);
+                                                    yazmaSonrasiGecikmeSayaci =
+                                                        0;
+                                                    String komut =
+                                                        "1*4*$t4UrunTipi";
+                                                    veriGonder(komut, 3000)
+                                                        .then((value) {
+                                                      if (value.split("*")[0] ==
+                                                          "error") {
+                                                        Toast.show(
+                                                            "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
+                                                            context,
+                                                            duration: 3);
+                                                      } else {
+                                                        Toast.show(
+                                                            "Başarılı", context,
+                                                            duration: 3);
 
-                                                      baglanti = false;
-                                                    }
-                                                  });
+                                                        baglanti = false;
+                                                      }
+                                                    });
 
-                                                  setState(() {});
+                                                    setState(() {});
+                                                  }else{
+                                                    Toast.show("Değişiklik yapma yetkiniz bulunmamaktadır.", context);
+                                                  }
                                                 },
                                                 fillColor: t4UrunTipi == "3"
                                                     ? Colors.green
@@ -1475,29 +1558,34 @@ class _HomePageState extends State<HomePage> {
                                                 constraints: BoxConstraints(
                                                     minWidth: double.infinity),
                                                 onPressed: () {
-                                                  t4UrunTipi = "4";
+                                                  if (adminYetki) {
+                                                    t4UrunTipi = "4";
 
-                                                  yazmaSonrasiGecikmeSayaci = 0;
-                                                  String komut =
-                                                      "1*4*$t4UrunTipi";
-                                                  veriGonder(komut, 3000)
-                                                      .then((value) {
-                                                    if (value.split("*")[0] ==
-                                                        "error") {
-                                                      Toast.show(
-                                                          "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
-                                                          context,
-                                                          duration: 3);
-                                                    } else {
-                                                      Toast.show(
-                                                          "Başarılı", context,
-                                                          duration: 3);
+                                                    yazmaSonrasiGecikmeSayaci =
+                                                        0;
+                                                    String komut =
+                                                        "1*4*$t4UrunTipi";
+                                                    veriGonder(komut, 3000)
+                                                        .then((value) {
+                                                      if (value.split("*")[0] ==
+                                                          "error") {
+                                                        Toast.show(
+                                                            "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
+                                                            context,
+                                                            duration: 3);
+                                                      } else {
+                                                        Toast.show(
+                                                            "Başarılı", context,
+                                                            duration: 3);
 
-                                                      baglanti = false;
-                                                    }
-                                                  });
+                                                        baglanti = false;
+                                                      }
+                                                    });
 
-                                                  setState(() {});
+                                                    setState(() {});
+                                                  }else{
+                                                    Toast.show("Değişiklik yapma yetkiniz bulunmamaktadır.", context);
+                                                  }
                                                 },
                                                 fillColor: t4UrunTipi == "4"
                                                     ? Colors.green
@@ -1556,29 +1644,34 @@ class _HomePageState extends State<HomePage> {
                                                 constraints: BoxConstraints(
                                                     minWidth: double.infinity),
                                                 onPressed: () {
-                                                  t5UrunTipi = "1";
+                                                  if (adminYetki) {
+                                                    t5UrunTipi = "1";
 
-                                                  yazmaSonrasiGecikmeSayaci = 0;
-                                                  String komut =
-                                                      "1*5*$t5UrunTipi";
-                                                  veriGonder(komut, 3000)
-                                                      .then((value) {
-                                                    if (value.split("*")[0] ==
-                                                        "error") {
-                                                      Toast.show(
-                                                          "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
-                                                          context,
-                                                          duration: 3);
-                                                    } else {
-                                                      Toast.show(
-                                                          "Başarılı", context,
-                                                          duration: 3);
+                                                    yazmaSonrasiGecikmeSayaci =
+                                                        0;
+                                                    String komut =
+                                                        "1*5*$t5UrunTipi";
+                                                    veriGonder(komut, 3000)
+                                                        .then((value) {
+                                                      if (value.split("*")[0] ==
+                                                          "error") {
+                                                        Toast.show(
+                                                            "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
+                                                            context,
+                                                            duration: 3);
+                                                      } else {
+                                                        Toast.show(
+                                                            "Başarılı", context,
+                                                            duration: 3);
 
-                                                      baglanti = false;
-                                                    }
-                                                  });
+                                                        baglanti = false;
+                                                      }
+                                                    });
 
-                                                  setState(() {});
+                                                    setState(() {});
+                                                  }else{
+                                                    Toast.show("Değişiklik yapma yetkiniz bulunmamaktadır.", context);
+                                                  }
                                                 },
                                                 fillColor: t5UrunTipi == "1"
                                                     ? Colors.green
@@ -1622,29 +1715,34 @@ class _HomePageState extends State<HomePage> {
                                                 constraints: BoxConstraints(
                                                     minWidth: double.infinity),
                                                 onPressed: () {
-                                                  t5UrunTipi = "2";
+                                                  if (adminYetki) {
+                                                    t5UrunTipi = "2";
 
-                                                  yazmaSonrasiGecikmeSayaci = 0;
-                                                  String komut =
-                                                      "1*5*$t5UrunTipi";
-                                                  veriGonder(komut, 3000)
-                                                      .then((value) {
-                                                    if (value.split("*")[0] ==
-                                                        "error") {
-                                                      Toast.show(
-                                                          "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
-                                                          context,
-                                                          duration: 3);
-                                                    } else {
-                                                      Toast.show(
-                                                          "Başarılı", context,
-                                                          duration: 3);
+                                                    yazmaSonrasiGecikmeSayaci =
+                                                        0;
+                                                    String komut =
+                                                        "1*5*$t5UrunTipi";
+                                                    veriGonder(komut, 3000)
+                                                        .then((value) {
+                                                      if (value.split("*")[0] ==
+                                                          "error") {
+                                                        Toast.show(
+                                                            "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
+                                                            context,
+                                                            duration: 3);
+                                                      } else {
+                                                        Toast.show(
+                                                            "Başarılı", context,
+                                                            duration: 3);
 
-                                                      baglanti = false;
-                                                    }
-                                                  });
+                                                        baglanti = false;
+                                                      }
+                                                    });
 
-                                                  setState(() {});
+                                                    setState(() {});
+                                                  }else{
+                                                    Toast.show("Değişiklik yapma yetkiniz bulunmamaktadır.", context);
+                                                  }
                                                 },
                                                 fillColor: t5UrunTipi == "2"
                                                     ? Colors.green
@@ -1697,29 +1795,34 @@ class _HomePageState extends State<HomePage> {
                                                 constraints: BoxConstraints(
                                                     minWidth: double.infinity),
                                                 onPressed: () {
-                                                  t5UrunTipi = "3";
+                                                  if (adminYetki) {
+                                                    t5UrunTipi = "3";
 
-                                                  yazmaSonrasiGecikmeSayaci = 0;
-                                                  String komut =
-                                                      "1*5*$t5UrunTipi";
-                                                  veriGonder(komut, 3000)
-                                                      .then((value) {
-                                                    if (value.split("*")[0] ==
-                                                        "error") {
-                                                      Toast.show(
-                                                          "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
-                                                          context,
-                                                          duration: 3);
-                                                    } else {
-                                                      Toast.show(
-                                                          "Başarılı", context,
-                                                          duration: 3);
+                                                    yazmaSonrasiGecikmeSayaci =
+                                                        0;
+                                                    String komut =
+                                                        "1*5*$t5UrunTipi";
+                                                    veriGonder(komut, 3000)
+                                                        .then((value) {
+                                                      if (value.split("*")[0] ==
+                                                          "error") {
+                                                        Toast.show(
+                                                            "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
+                                                            context,
+                                                            duration: 3);
+                                                      } else {
+                                                        Toast.show(
+                                                            "Başarılı", context,
+                                                            duration: 3);
 
-                                                      baglanti = false;
-                                                    }
-                                                  });
+                                                        baglanti = false;
+                                                      }
+                                                    });
 
-                                                  setState(() {});
+                                                    setState(() {});
+                                                  }else{
+                                                    Toast.show("Değişiklik yapma yetkiniz bulunmamaktadır.", context);
+                                                  }
                                                 },
                                                 fillColor: t5UrunTipi == "3"
                                                     ? Colors.green
@@ -1763,29 +1866,34 @@ class _HomePageState extends State<HomePage> {
                                                 constraints: BoxConstraints(
                                                     minWidth: double.infinity),
                                                 onPressed: () {
-                                                  t5UrunTipi = "4";
+                                                  if (adminYetki) {
+                                                    t5UrunTipi = "4";
 
-                                                  yazmaSonrasiGecikmeSayaci = 0;
-                                                  String komut =
-                                                      "1*5*$t5UrunTipi";
-                                                  veriGonder(komut, 3000)
-                                                      .then((value) {
-                                                    if (value.split("*")[0] ==
-                                                        "error") {
-                                                      Toast.show(
-                                                          "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
-                                                          context,
-                                                          duration: 3);
-                                                    } else {
-                                                      Toast.show(
-                                                          "Başarılı", context,
-                                                          duration: 3);
+                                                    yazmaSonrasiGecikmeSayaci =
+                                                        0;
+                                                    String komut =
+                                                        "1*5*$t5UrunTipi";
+                                                    veriGonder(komut, 3000)
+                                                        .then((value) {
+                                                      if (value.split("*")[0] ==
+                                                          "error") {
+                                                        Toast.show(
+                                                            "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
+                                                            context,
+                                                            duration: 3);
+                                                      } else {
+                                                        Toast.show(
+                                                            "Başarılı", context,
+                                                            duration: 3);
 
-                                                      baglanti = false;
-                                                    }
-                                                  });
+                                                        baglanti = false;
+                                                      }
+                                                    });
 
-                                                  setState(() {});
+                                                    setState(() {});
+                                                  }else{
+                                                    Toast.show("Değişiklik yapma yetkiniz bulunmamaktadır.", context);
+                                                  }
                                                 },
                                                 fillColor: t5UrunTipi == "4"
                                                     ? Colors.green
@@ -1897,47 +2005,53 @@ class _HomePageState extends State<HomePage> {
                                               alignment: Alignment.topCenter,
                                               child: RawMaterialButton(
                                                 onPressed: () {
-                                                  if (t1OlcumAktif == "0") {
-                                                    Toast.show(
-                                                        "Yağ seviyesi sıfır seviyesinin altındayken sanal sensör pasif edilemez!",
-                                                        context,
-                                                        duration: 3);
-                                                  } else {
-                                                    _index = 1;
-                                                    if (t1SanalSensorAktiflik) {
-                                                      t1SanalSensorAktiflik =
-                                                          false;
+                                                  if (adminYetki) {
+                                                    if (t1OlcumAktif == "0") {
+                                                      Toast.show(
+                                                          "Yağ seviyesi sıfır seviyesinin altındayken sanal sensör pasif edilemez!",
+                                                          context,
+                                                          duration: 3);
                                                     } else {
-                                                      t1SanalSensorAktiflik =
-                                                          true;
-                                                    }
-                                                    String veri =
-                                                        t1SanalSensorAktiflik ==
-                                                                true
-                                                            ? '1'
-                                                            : '0';
-
-                                                    yazmaSonrasiGecikmeSayaci =
-                                                        0;
-                                                    String komut = "2*1*$veri";
-                                                    veriGonder(komut, 3000)
-                                                        .then((value) {
-                                                      if (value.split("*")[0] ==
-                                                          "error") {
-                                                        Toast.show(
-                                                            "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
-                                                            context,
-                                                            duration: 3);
+                                                      _index = 1;
+                                                      if (t1SanalSensorAktiflik) {
+                                                        t1SanalSensorAktiflik =
+                                                            false;
                                                       } else {
-                                                        Toast.show(
-                                                            "Başarılı", context,
-                                                            duration: 3);
-
-                                                        baglanti = false;
+                                                        t1SanalSensorAktiflik =
+                                                            true;
                                                       }
-                                                    });
+                                                      String veri =
+                                                          t1SanalSensorAktiflik ==
+                                                                  true
+                                                              ? '1'
+                                                              : '0';
 
-                                                    setState(() {});
+                                                      yazmaSonrasiGecikmeSayaci =
+                                                          0;
+                                                      String komut =
+                                                          "2*1*$veri";
+                                                      veriGonder(komut, 3000)
+                                                          .then((value) {
+                                                        if (value.split(
+                                                                "*")[0] ==
+                                                            "error") {
+                                                          Toast.show(
+                                                              "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
+                                                              context,
+                                                              duration: 3);
+                                                        } else {
+                                                          Toast.show("Başarılı",
+                                                              context,
+                                                              duration: 3);
+
+                                                          baglanti = false;
+                                                        }
+                                                      });
+
+                                                      setState(() {});
+                                                    }
+                                                  }else{
+                                                    Toast.show("Değişiklik yapma yetkiniz bulunmamaktadır.", context);
                                                   }
                                                 },
                                                 child: Icon(
@@ -2001,47 +2115,53 @@ class _HomePageState extends State<HomePage> {
                                               alignment: Alignment.topCenter,
                                               child: RawMaterialButton(
                                                 onPressed: () {
-                                                  if (t2OlcumAktif == "0") {
-                                                    Toast.show(
-                                                        "Yağ seviyesi sıfır seviyesinin altındayken sanal sensör pasif edilemez!",
-                                                        context,
-                                                        duration: 3);
-                                                  } else {
-                                                    _index = 2;
-                                                    if (t2SanalSensorAktiflik) {
-                                                      t2SanalSensorAktiflik =
-                                                          false;
+                                                  if (adminYetki) {
+                                                    if (t2OlcumAktif == "0") {
+                                                      Toast.show(
+                                                          "Yağ seviyesi sıfır seviyesinin altındayken sanal sensör pasif edilemez!",
+                                                          context,
+                                                          duration: 3);
                                                     } else {
-                                                      t2SanalSensorAktiflik =
-                                                          true;
-                                                    }
-                                                    String veri =
-                                                        t2SanalSensorAktiflik ==
-                                                                true
-                                                            ? '1'
-                                                            : '0';
-
-                                                    yazmaSonrasiGecikmeSayaci =
-                                                        0;
-                                                    String komut = "2*2*$veri";
-                                                    veriGonder(komut, 3000)
-                                                        .then((value) {
-                                                      if (value.split("*")[0] ==
-                                                          "error") {
-                                                        Toast.show(
-                                                            "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
-                                                            context,
-                                                            duration: 3);
+                                                      _index = 2;
+                                                      if (t2SanalSensorAktiflik) {
+                                                        t2SanalSensorAktiflik =
+                                                            false;
                                                       } else {
-                                                        Toast.show(
-                                                            "Başarılı", context,
-                                                            duration: 3);
-
-                                                        baglanti = false;
+                                                        t2SanalSensorAktiflik =
+                                                            true;
                                                       }
-                                                    });
+                                                      String veri =
+                                                          t2SanalSensorAktiflik ==
+                                                                  true
+                                                              ? '1'
+                                                              : '0';
 
-                                                    setState(() {});
+                                                      yazmaSonrasiGecikmeSayaci =
+                                                          0;
+                                                      String komut =
+                                                          "2*2*$veri";
+                                                      veriGonder(komut, 3000)
+                                                          .then((value) {
+                                                        if (value.split(
+                                                                "*")[0] ==
+                                                            "error") {
+                                                          Toast.show(
+                                                              "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
+                                                              context,
+                                                              duration: 3);
+                                                        } else {
+                                                          Toast.show("Başarılı",
+                                                              context,
+                                                              duration: 3);
+
+                                                          baglanti = false;
+                                                        }
+                                                      });
+
+                                                      setState(() {});
+                                                    }
+                                                  }else{
+                                                    Toast.show("Değişiklik yapma yetkiniz bulunmamaktadır.", context);
                                                   }
                                                 },
                                                 child: Icon(
@@ -2105,47 +2225,53 @@ class _HomePageState extends State<HomePage> {
                                               alignment: Alignment.topCenter,
                                               child: RawMaterialButton(
                                                 onPressed: () {
-                                                  if (t3OlcumAktif == "0") {
-                                                    Toast.show(
-                                                        "Yağ seviyesi sıfır seviyesinin altındayken sanal sensör pasif edilemez!",
-                                                        context,
-                                                        duration: 3);
-                                                  } else {
-                                                    _index = 3;
-                                                    if (t3SanalSensorAktiflik) {
-                                                      t3SanalSensorAktiflik =
-                                                          false;
+                                                  if (adminYetki) {
+                                                    if (t3OlcumAktif == "0") {
+                                                      Toast.show(
+                                                          "Yağ seviyesi sıfır seviyesinin altındayken sanal sensör pasif edilemez!",
+                                                          context,
+                                                          duration: 3);
                                                     } else {
-                                                      t3SanalSensorAktiflik =
-                                                          true;
-                                                    }
-                                                    String veri =
-                                                        t3SanalSensorAktiflik ==
-                                                                true
-                                                            ? '1'
-                                                            : '0';
-
-                                                    yazmaSonrasiGecikmeSayaci =
-                                                        0;
-                                                    String komut = "2*3*$veri";
-                                                    veriGonder(komut, 3000)
-                                                        .then((value) {
-                                                      if (value.split("*")[0] ==
-                                                          "error") {
-                                                        Toast.show(
-                                                            "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
-                                                            context,
-                                                            duration: 3);
+                                                      _index = 3;
+                                                      if (t3SanalSensorAktiflik) {
+                                                        t3SanalSensorAktiflik =
+                                                            false;
                                                       } else {
-                                                        Toast.show(
-                                                            "Başarılı", context,
-                                                            duration: 3);
-
-                                                        baglanti = false;
+                                                        t3SanalSensorAktiflik =
+                                                            true;
                                                       }
-                                                    });
+                                                      String veri =
+                                                          t3SanalSensorAktiflik ==
+                                                                  true
+                                                              ? '1'
+                                                              : '0';
 
-                                                    setState(() {});
+                                                      yazmaSonrasiGecikmeSayaci =
+                                                          0;
+                                                      String komut =
+                                                          "2*3*$veri";
+                                                      veriGonder(komut, 3000)
+                                                          .then((value) {
+                                                        if (value.split(
+                                                                "*")[0] ==
+                                                            "error") {
+                                                          Toast.show(
+                                                              "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
+                                                              context,
+                                                              duration: 3);
+                                                        } else {
+                                                          Toast.show("Başarılı",
+                                                              context,
+                                                              duration: 3);
+
+                                                          baglanti = false;
+                                                        }
+                                                      });
+
+                                                      setState(() {});
+                                                    }
+                                                  }else{
+                                                    Toast.show("Değişiklik yapma yetkiniz bulunmamaktadır.", context);
                                                   }
                                                 },
                                                 child: Icon(
@@ -2209,47 +2335,53 @@ class _HomePageState extends State<HomePage> {
                                               alignment: Alignment.topCenter,
                                               child: RawMaterialButton(
                                                 onPressed: () {
-                                                  if (t4OlcumAktif == "0") {
-                                                    Toast.show(
-                                                        "Yağ seviyesi sıfır seviyesinin altındayken sanal sensör pasif edilemez!",
-                                                        context,
-                                                        duration: 3);
-                                                  } else {
-                                                    _index = 4;
-                                                    if (t4SanalSensorAktiflik) {
-                                                      t4SanalSensorAktiflik =
-                                                          false;
+                                                  if (adminYetki) {
+                                                    if (t4OlcumAktif == "0") {
+                                                      Toast.show(
+                                                          "Yağ seviyesi sıfır seviyesinin altındayken sanal sensör pasif edilemez!",
+                                                          context,
+                                                          duration: 3);
                                                     } else {
-                                                      t4SanalSensorAktiflik =
-                                                          true;
-                                                    }
-                                                    String veri =
-                                                        t4SanalSensorAktiflik ==
-                                                                true
-                                                            ? '1'
-                                                            : '0';
-
-                                                    yazmaSonrasiGecikmeSayaci =
-                                                        0;
-                                                    String komut = "2*4*$veri";
-                                                    veriGonder(komut, 3000)
-                                                        .then((value) {
-                                                      if (value.split("*")[0] ==
-                                                          "error") {
-                                                        Toast.show(
-                                                            "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
-                                                            context,
-                                                            duration: 3);
+                                                      _index = 4;
+                                                      if (t4SanalSensorAktiflik) {
+                                                        t4SanalSensorAktiflik =
+                                                            false;
                                                       } else {
-                                                        Toast.show(
-                                                            "Başarılı", context,
-                                                            duration: 3);
-
-                                                        baglanti = false;
+                                                        t4SanalSensorAktiflik =
+                                                            true;
                                                       }
-                                                    });
+                                                      String veri =
+                                                          t4SanalSensorAktiflik ==
+                                                                  true
+                                                              ? '1'
+                                                              : '0';
 
-                                                    setState(() {});
+                                                      yazmaSonrasiGecikmeSayaci =
+                                                          0;
+                                                      String komut =
+                                                          "2*4*$veri";
+                                                      veriGonder(komut, 3000)
+                                                          .then((value) {
+                                                        if (value.split(
+                                                                "*")[0] ==
+                                                            "error") {
+                                                          Toast.show(
+                                                              "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
+                                                              context,
+                                                              duration: 3);
+                                                        } else {
+                                                          Toast.show("Başarılı",
+                                                              context,
+                                                              duration: 3);
+
+                                                          baglanti = false;
+                                                        }
+                                                      });
+
+                                                      setState(() {});
+                                                    }
+                                                  }else{
+                                                    Toast.show("Değişiklik yapma yetkiniz bulunmamaktadır.", context);
                                                   }
                                                 },
                                                 child: Icon(
@@ -2313,47 +2445,53 @@ class _HomePageState extends State<HomePage> {
                                               alignment: Alignment.topCenter,
                                               child: RawMaterialButton(
                                                 onPressed: () {
-                                                  if (t5OlcumAktif == "0") {
-                                                    Toast.show(
-                                                        "Yağ seviyesi sıfır seviyesinin altındayken sanal sensör pasif edilemez!",
-                                                        context,
-                                                        duration: 3);
-                                                  } else {
-                                                    _index = 5;
-                                                    if (t5SanalSensorAktiflik) {
-                                                      t5SanalSensorAktiflik =
-                                                          false;
+                                                  if (adminYetki) {
+                                                    if (t5OlcumAktif == "0") {
+                                                      Toast.show(
+                                                          "Yağ seviyesi sıfır seviyesinin altındayken sanal sensör pasif edilemez!",
+                                                          context,
+                                                          duration: 3);
                                                     } else {
-                                                      t5SanalSensorAktiflik =
-                                                          true;
-                                                    }
-                                                    String veri =
-                                                        t5SanalSensorAktiflik ==
-                                                                true
-                                                            ? '1'
-                                                            : '0';
-
-                                                    yazmaSonrasiGecikmeSayaci =
-                                                        0;
-                                                    String komut = "2*5*$veri";
-                                                    veriGonder(komut, 3000)
-                                                        .then((value) {
-                                                      if (value.split("*")[0] ==
-                                                          "error") {
-                                                        Toast.show(
-                                                            "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
-                                                            context,
-                                                            duration: 3);
+                                                      _index = 5;
+                                                      if (t5SanalSensorAktiflik) {
+                                                        t5SanalSensorAktiflik =
+                                                            false;
                                                       } else {
-                                                        Toast.show(
-                                                            "Başarılı", context,
-                                                            duration: 3);
-
-                                                        baglanti = false;
+                                                        t5SanalSensorAktiflik =
+                                                            true;
                                                       }
-                                                    });
+                                                      String veri =
+                                                          t5SanalSensorAktiflik ==
+                                                                  true
+                                                              ? '1'
+                                                              : '0';
 
-                                                    setState(() {});
+                                                      yazmaSonrasiGecikmeSayaci =
+                                                          0;
+                                                      String komut =
+                                                          "2*5*$veri";
+                                                      veriGonder(komut, 3000)
+                                                          .then((value) {
+                                                        if (value.split(
+                                                                "*")[0] ==
+                                                            "error") {
+                                                          Toast.show(
+                                                              "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
+                                                              context,
+                                                              duration: 3);
+                                                        } else {
+                                                          Toast.show("Başarılı",
+                                                              context,
+                                                              duration: 3);
+
+                                                          baglanti = false;
+                                                        }
+                                                      });
+
+                                                      setState(() {});
+                                                    }
+                                                  }else{
+                                                    Toast.show("Değişiklik yapma yetkiniz bulunmamaktadır.", context);
                                                   }
                                                 },
                                                 child: Icon(
@@ -2459,47 +2597,53 @@ class _HomePageState extends State<HomePage> {
                                               alignment: Alignment.topCenter,
                                               child: RawMaterialButton(
                                                 onPressed: () {
-                                                  if (t1OlcumAktif == "1") {
-                                                    Toast.show(
-                                                        "Yağ seviyesi sıfır seviyesinin üstünde ise bu parametre pasif edilemez!",
-                                                        context,
-                                                        duration: 3);
-                                                  } else {
-                                                    _index = 1;
-                                                    if (t1SifirinAltindaYagVarMi) {
-                                                      t1SifirinAltindaYagVarMi =
-                                                          false;
+                                                  if (adminYetki) {
+                                                    if (t1OlcumAktif == "1") {
+                                                      Toast.show(
+                                                          "Yağ seviyesi sıfır seviyesinin üstünde ise bu parametre pasif edilemez!",
+                                                          context,
+                                                          duration: 3);
                                                     } else {
-                                                      t1SifirinAltindaYagVarMi =
-                                                          true;
-                                                    }
-                                                    String veri =
-                                                        t1SifirinAltindaYagVarMi ==
-                                                                true
-                                                            ? '1'
-                                                            : '0';
-
-                                                    yazmaSonrasiGecikmeSayaci =
-                                                        0;
-                                                    String komut = "5*1*$veri";
-                                                    veriGonder(komut, 3000)
-                                                        .then((value) {
-                                                      if (value.split("*")[0] ==
-                                                          "error") {
-                                                        Toast.show(
-                                                            "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
-                                                            context,
-                                                            duration: 3);
+                                                      _index = 1;
+                                                      if (t1SifirinAltindaYagVarMi) {
+                                                        t1SifirinAltindaYagVarMi =
+                                                            false;
                                                       } else {
-                                                        Toast.show(
-                                                            "Başarılı", context,
-                                                            duration: 3);
-
-                                                        baglanti = false;
+                                                        t1SifirinAltindaYagVarMi =
+                                                            true;
                                                       }
-                                                    });
+                                                      String veri =
+                                                          t1SifirinAltindaYagVarMi ==
+                                                                  true
+                                                              ? '1'
+                                                              : '0';
 
-                                                    setState(() {});
+                                                      yazmaSonrasiGecikmeSayaci =
+                                                          0;
+                                                      String komut =
+                                                          "5*1*$veri";
+                                                      veriGonder(komut, 3000)
+                                                          .then((value) {
+                                                        if (value.split(
+                                                                "*")[0] ==
+                                                            "error") {
+                                                          Toast.show(
+                                                              "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
+                                                              context,
+                                                              duration: 3);
+                                                        } else {
+                                                          Toast.show("Başarılı",
+                                                              context,
+                                                              duration: 3);
+
+                                                          baglanti = false;
+                                                        }
+                                                      });
+
+                                                      setState(() {});
+                                                    }
+                                                  }else{
+                                                    Toast.show("Değişiklik yapma yetkiniz bulunmamaktadır.", context);
                                                   }
                                                 },
                                                 child: Icon(
@@ -2564,47 +2708,53 @@ class _HomePageState extends State<HomePage> {
                                               alignment: Alignment.topCenter,
                                               child: RawMaterialButton(
                                                 onPressed: () {
-                                                  if (t2OlcumAktif == "1") {
-                                                    Toast.show(
-                                                        "Yağ seviyesi sıfır seviyesinin üstünde ise bu parametre pasif edilemez!",
-                                                        context,
-                                                        duration: 3);
-                                                  } else {
-                                                    _index = 2;
-                                                    if (t2SifirinAltindaYagVarMi) {
-                                                      t2SifirinAltindaYagVarMi =
-                                                          false;
+                                                  if (adminYetki) {
+                                                    if (t2OlcumAktif == "1") {
+                                                      Toast.show(
+                                                          "Yağ seviyesi sıfır seviyesinin üstünde ise bu parametre pasif edilemez!",
+                                                          context,
+                                                          duration: 3);
                                                     } else {
-                                                      t2SifirinAltindaYagVarMi =
-                                                          true;
-                                                    }
-                                                    String veri =
-                                                        t2SifirinAltindaYagVarMi ==
-                                                                true
-                                                            ? '1'
-                                                            : '0';
-
-                                                    yazmaSonrasiGecikmeSayaci =
-                                                        0;
-                                                    String komut = "5*2*$veri";
-                                                    veriGonder(komut, 3000)
-                                                        .then((value) {
-                                                      if (value.split("*")[0] ==
-                                                          "error") {
-                                                        Toast.show(
-                                                            "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
-                                                            context,
-                                                            duration: 3);
+                                                      _index = 2;
+                                                      if (t2SifirinAltindaYagVarMi) {
+                                                        t2SifirinAltindaYagVarMi =
+                                                            false;
                                                       } else {
-                                                        Toast.show(
-                                                            "Başarılı", context,
-                                                            duration: 3);
-
-                                                        baglanti = false;
+                                                        t2SifirinAltindaYagVarMi =
+                                                            true;
                                                       }
-                                                    });
+                                                      String veri =
+                                                          t2SifirinAltindaYagVarMi ==
+                                                                  true
+                                                              ? '1'
+                                                              : '0';
 
-                                                    setState(() {});
+                                                      yazmaSonrasiGecikmeSayaci =
+                                                          0;
+                                                      String komut =
+                                                          "5*2*$veri";
+                                                      veriGonder(komut, 3000)
+                                                          .then((value) {
+                                                        if (value.split(
+                                                                "*")[0] ==
+                                                            "error") {
+                                                          Toast.show(
+                                                              "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
+                                                              context,
+                                                              duration: 3);
+                                                        } else {
+                                                          Toast.show("Başarılı",
+                                                              context,
+                                                              duration: 3);
+
+                                                          baglanti = false;
+                                                        }
+                                                      });
+
+                                                      setState(() {});
+                                                    }
+                                                  }else{
+                                                    Toast.show("Değişiklik yapma yetkiniz bulunmamaktadır.", context);
                                                   }
                                                 },
                                                 child: Icon(
@@ -2669,47 +2819,53 @@ class _HomePageState extends State<HomePage> {
                                               alignment: Alignment.topCenter,
                                               child: RawMaterialButton(
                                                 onPressed: () {
-                                                  if (t3OlcumAktif == "1") {
-                                                    Toast.show(
-                                                        "Yağ seviyesi sıfır seviyesinin üstünde ise bu parametre pasif edilemez!",
-                                                        context,
-                                                        duration: 3);
-                                                  } else {
-                                                    _index = 3;
-                                                    if (t3SifirinAltindaYagVarMi) {
-                                                      t3SifirinAltindaYagVarMi =
-                                                          false;
+                                                  if (adminYetki) {
+                                                    if (t3OlcumAktif == "1") {
+                                                      Toast.show(
+                                                          "Yağ seviyesi sıfır seviyesinin üstünde ise bu parametre pasif edilemez!",
+                                                          context,
+                                                          duration: 3);
                                                     } else {
-                                                      t3SifirinAltindaYagVarMi =
-                                                          true;
-                                                    }
-                                                    String veri =
-                                                        t3SifirinAltindaYagVarMi ==
-                                                                true
-                                                            ? '1'
-                                                            : '0';
-
-                                                    yazmaSonrasiGecikmeSayaci =
-                                                        0;
-                                                    String komut = "5*3*$veri";
-                                                    veriGonder(komut, 3000)
-                                                        .then((value) {
-                                                      if (value.split("*")[0] ==
-                                                          "error") {
-                                                        Toast.show(
-                                                            "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
-                                                            context,
-                                                            duration: 3);
+                                                      _index = 3;
+                                                      if (t3SifirinAltindaYagVarMi) {
+                                                        t3SifirinAltindaYagVarMi =
+                                                            false;
                                                       } else {
-                                                        Toast.show(
-                                                            "Başarılı", context,
-                                                            duration: 3);
-
-                                                        baglanti = false;
+                                                        t3SifirinAltindaYagVarMi =
+                                                            true;
                                                       }
-                                                    });
+                                                      String veri =
+                                                          t3SifirinAltindaYagVarMi ==
+                                                                  true
+                                                              ? '1'
+                                                              : '0';
 
-                                                    setState(() {});
+                                                      yazmaSonrasiGecikmeSayaci =
+                                                          0;
+                                                      String komut =
+                                                          "5*3*$veri";
+                                                      veriGonder(komut, 3000)
+                                                          .then((value) {
+                                                        if (value.split(
+                                                                "*")[0] ==
+                                                            "error") {
+                                                          Toast.show(
+                                                              "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
+                                                              context,
+                                                              duration: 3);
+                                                        } else {
+                                                          Toast.show("Başarılı",
+                                                              context,
+                                                              duration: 3);
+
+                                                          baglanti = false;
+                                                        }
+                                                      });
+
+                                                      setState(() {});
+                                                    }
+                                                  }else{
+                                                    Toast.show("Değişiklik yapma yetkiniz bulunmamaktadır.", context);
                                                   }
                                                 },
                                                 child: Icon(
@@ -2774,47 +2930,53 @@ class _HomePageState extends State<HomePage> {
                                               alignment: Alignment.topCenter,
                                               child: RawMaterialButton(
                                                 onPressed: () {
-                                                  if (t4OlcumAktif == "1") {
-                                                    Toast.show(
-                                                        "Yağ seviyesi sıfır seviyesinin üstünde ise bu parametre pasif edilemez!",
-                                                        context,
-                                                        duration: 3);
-                                                  } else {
-                                                    _index = 4;
-                                                    if (t4SifirinAltindaYagVarMi) {
-                                                      t4SifirinAltindaYagVarMi =
-                                                          false;
+                                                  if (adminYetki) {
+                                                    if (t4OlcumAktif == "1") {
+                                                      Toast.show(
+                                                          "Yağ seviyesi sıfır seviyesinin üstünde ise bu parametre pasif edilemez!",
+                                                          context,
+                                                          duration: 3);
                                                     } else {
-                                                      t4SifirinAltindaYagVarMi =
-                                                          true;
-                                                    }
-                                                    String veri =
-                                                        t4SifirinAltindaYagVarMi ==
-                                                                true
-                                                            ? '1'
-                                                            : '0';
-
-                                                    yazmaSonrasiGecikmeSayaci =
-                                                        0;
-                                                    String komut = "5*4*$veri";
-                                                    veriGonder(komut, 3000)
-                                                        .then((value) {
-                                                      if (value.split("*")[0] ==
-                                                          "error") {
-                                                        Toast.show(
-                                                            "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
-                                                            context,
-                                                            duration: 3);
+                                                      _index = 4;
+                                                      if (t4SifirinAltindaYagVarMi) {
+                                                        t4SifirinAltindaYagVarMi =
+                                                            false;
                                                       } else {
-                                                        Toast.show(
-                                                            "Başarılı", context,
-                                                            duration: 3);
-
-                                                        baglanti = false;
+                                                        t4SifirinAltindaYagVarMi =
+                                                            true;
                                                       }
-                                                    });
+                                                      String veri =
+                                                          t4SifirinAltindaYagVarMi ==
+                                                                  true
+                                                              ? '1'
+                                                              : '0';
 
-                                                    setState(() {});
+                                                      yazmaSonrasiGecikmeSayaci =
+                                                          0;
+                                                      String komut =
+                                                          "5*4*$veri";
+                                                      veriGonder(komut, 3000)
+                                                          .then((value) {
+                                                        if (value.split(
+                                                                "*")[0] ==
+                                                            "error") {
+                                                          Toast.show(
+                                                              "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
+                                                              context,
+                                                              duration: 3);
+                                                        } else {
+                                                          Toast.show("Başarılı",
+                                                              context,
+                                                              duration: 3);
+
+                                                          baglanti = false;
+                                                        }
+                                                      });
+
+                                                      setState(() {});
+                                                    }
+                                                  }else{
+                                                    Toast.show("Değişiklik yapma yetkiniz bulunmamaktadır.", context);
                                                   }
                                                 },
                                                 child: Icon(
@@ -2879,47 +3041,53 @@ class _HomePageState extends State<HomePage> {
                                               alignment: Alignment.topCenter,
                                               child: RawMaterialButton(
                                                 onPressed: () {
-                                                  if (t5OlcumAktif == "1") {
-                                                    Toast.show(
-                                                        "Yağ seviyesi sıfır seviyesinin üstünde ise bu parametre pasif edilemez!",
-                                                        context,
-                                                        duration: 3);
-                                                  } else {
-                                                    _index = 5;
-                                                    if (t5SifirinAltindaYagVarMi) {
-                                                      t5SifirinAltindaYagVarMi =
-                                                          false;
+                                                  if (adminYetki) {
+                                                    if (t5OlcumAktif == "1") {
+                                                      Toast.show(
+                                                          "Yağ seviyesi sıfır seviyesinin üstünde ise bu parametre pasif edilemez!",
+                                                          context,
+                                                          duration: 3);
                                                     } else {
-                                                      t5SifirinAltindaYagVarMi =
-                                                          true;
-                                                    }
-                                                    String veri =
-                                                        t5SifirinAltindaYagVarMi ==
-                                                                true
-                                                            ? '1'
-                                                            : '0';
-
-                                                    yazmaSonrasiGecikmeSayaci =
-                                                        0;
-                                                    String komut = "5*5*$veri";
-                                                    veriGonder(komut, 3000)
-                                                        .then((value) {
-                                                      if (value.split("*")[0] ==
-                                                          "error") {
-                                                        Toast.show(
-                                                            "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
-                                                            context,
-                                                            duration: 3);
+                                                      _index = 5;
+                                                      if (t5SifirinAltindaYagVarMi) {
+                                                        t5SifirinAltindaYagVarMi =
+                                                            false;
                                                       } else {
-                                                        Toast.show(
-                                                            "Başarılı", context,
-                                                            duration: 3);
-
-                                                        baglanti = false;
+                                                        t5SifirinAltindaYagVarMi =
+                                                            true;
                                                       }
-                                                    });
+                                                      String veri =
+                                                          t5SifirinAltindaYagVarMi ==
+                                                                  true
+                                                              ? '1'
+                                                              : '0';
 
-                                                    setState(() {});
+                                                      yazmaSonrasiGecikmeSayaci =
+                                                          0;
+                                                      String komut =
+                                                          "5*5*$veri";
+                                                      veriGonder(komut, 3000)
+                                                          .then((value) {
+                                                        if (value.split(
+                                                                "*")[0] ==
+                                                            "error") {
+                                                          Toast.show(
+                                                              "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
+                                                              context,
+                                                              duration: 3);
+                                                        } else {
+                                                          Toast.show("Başarılı",
+                                                              context,
+                                                              duration: 3);
+
+                                                          baglanti = false;
+                                                        }
+                                                      });
+
+                                                      setState(() {});
+                                                    }
+                                                  }else{
+                                                    Toast.show("Değişiklik yapma yetkiniz bulunmamaktadır.", context);
                                                   }
                                                 },
                                                 child: Icon(
@@ -3026,17 +3194,21 @@ class _HomePageState extends State<HomePage> {
                             child: RawMaterialButton(
                               elevation: 16,
                               onPressed: () {
-                                int sayi = int.parse(tolerans);
-                                _yuzler = sayi < 100 ? 0 : sayi ~/ 100;
-                                _onlar = sayi < 10
-                                    ? 0
-                                    : (sayi > 99
-                                        ? (sayi - 100 * _yuzler) ~/ 10
-                                        : sayi ~/ 10);
-                                _birler = sayi % 10;
-                                _degergiris3X0(_yuzler, _onlar, _birler, 1,
-                                        "Ölçüm Toleransı (mm)", "")
-                                    .then((onValue) {});
+                                if (adminYetki) {
+                                  int sayi = int.parse(tolerans);
+                                  _yuzler = sayi < 100 ? 0 : sayi ~/ 100;
+                                  _onlar = sayi < 10
+                                      ? 0
+                                      : (sayi > 99
+                                          ? (sayi - 100 * _yuzler) ~/ 10
+                                          : sayi ~/ 10);
+                                  _birler = sayi % 10;
+                                  _degergiris3X0(_yuzler, _onlar, _birler, 1,
+                                          "Ölçüm Toleransı (mm)", "")
+                                      .then((onValue) {});
+                                }else{
+                                                    Toast.show("Değişiklik yapma yetkiniz bulunmamaktadır.", context);
+                                                  }
                               },
                               child: SizedBox(
                                 child: Container(
@@ -3078,6 +3250,7 @@ class _HomePageState extends State<HomePage> {
                                 "Bağlantı Durumu",
                                 style: TextStyle(fontSize: 15 * oran),
                                 maxLines: 1,
+                                minFontSize: 2,
                               ),
                             ),
                           ),
@@ -3122,7 +3295,15 @@ class _HomePageState extends State<HomePage> {
                                     print(mydata["example_data"][0]["ip"]);
                                     ipNo = (mydata["example_data"][0]["ip"])
                                         .toString();
-                                    return Text(ipNo);
+                                    return SizedBox(
+                                      child: Container(
+                                        child: AutoSizeText(
+                                          ipNo,
+                                          style: TextStyle(fontSize: 10 * oran),
+                                          minFontSize: 2,
+                                        ),
+                                      ),
+                                    );
                                   }),
                             ),
                           ),
