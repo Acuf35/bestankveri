@@ -21,7 +21,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   String baglantiDurum = "";
 
-  bool adminYetki = false;
+  bool adminYetki = true;
 
   String ipNo = "192.168.1.110";
 
