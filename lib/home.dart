@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> {
 
   bool adminYetki = true;
 
-  String ipNo = "192.168.1.90";
+  String ipNo = "192.168.1.110";
 
   int _yuzler = 0;
   int _onlar = 0;
@@ -3285,26 +3285,16 @@ class _HomePageState extends State<HomePage> {
 
                         Expanded(
                           child: Container(
-                            child: Center(
-                              child: FutureBuilder(
-                                  future: DefaultAssetBundle.of(context)
-                                      .loadString("assets/data.json"),
-                                  builder: (context, snapshot) {
-                                    var mydata =
-                                        jsonDecode(snapshot.data.toString());
-                                    print(mydata["example_data"][0]["ip"]);
-                                    ipNo = (mydata["example_data"][0]["ip"])
-                                        .toString();
-                                    return SizedBox(
-                                      child: Container(
-                                        child: AutoSizeText(
-                                          ipNo,
-                                          style: TextStyle(fontSize: 10 * oran),
-                                          minFontSize: 2,
-                                        ),
-                                      ),
-                                    );
-                                  }),
+                            child: SizedBox(
+                              child: AutoSizeText(
+                                ipNo,
+                                style: TextStyle(
+                                  fontSize: 10*oran,
+
+                                ),
+                                maxLines: 1,
+                                minFontSize: 2,
+                              )
                             ),
                           ),
                         )
@@ -3417,17 +3407,19 @@ class _HomePageState extends State<HomePage> {
 
     if (t1OlcumAktif == "1") {
       t1ortalamadakiSensor[1] = true;
-    } else {
+    } else if(t1OlcumAktif == "0" && int.parse(manSeviyeT1)<200) {
       t1ortalamadakiSensor[1] = false;
+    }else if(t1OlcumAktif == "0" && int.parse(manSeviyeT1)>=200){
+      t1ortalamadakiSensor[1] = true;
     }
 
-    if (seviyeT1 >= double.parse(sensSev2)) {
+    if (seviyeT1 >= double.parse(sensSev2)-0.26) {
       t1ortalamadakiSensor[2] = true;
     } else {
       t1ortalamadakiSensor[2] = false;
     }
 
-    if (seviyeT1 >= double.parse(sensSev3)) {
+    if (seviyeT1 >= double.parse(sensSev3)-0.26) {
       t1ortalamadakiSensor[3] = true;
     } else {
       t1ortalamadakiSensor[3] = false;
@@ -3435,17 +3427,19 @@ class _HomePageState extends State<HomePage> {
 
     if (t2OlcumAktif == "1") {
       t2ortalamadakiSensor[1] = true;
-    } else {
+    } else if(t2OlcumAktif == "0" && int.parse(manSeviyeT2)<200) {
       t2ortalamadakiSensor[1] = false;
+    }else if(t2OlcumAktif == "0" && int.parse(manSeviyeT2)>=200){
+      t2ortalamadakiSensor[1] = true;
     }
 
-    if (seviyeT2 >= double.parse(sensSev2)) {
+    if (seviyeT2 >= double.parse(sensSev2)-0.26) {
       t2ortalamadakiSensor[2] = true;
     } else {
       t2ortalamadakiSensor[2] = false;
     }
 
-    if (seviyeT2 >= double.parse(sensSev3)) {
+    if (seviyeT2 >= double.parse(sensSev3)-0.26) {
       t2ortalamadakiSensor[3] = true;
     } else {
       t2ortalamadakiSensor[3] = false;
@@ -3453,17 +3447,19 @@ class _HomePageState extends State<HomePage> {
 
     if (t3OlcumAktif == "1") {
       t3ortalamadakiSensor[1] = true;
-    } else {
+    } else if(t3OlcumAktif == "0" && int.parse(manSeviyeT3)<200) {
       t3ortalamadakiSensor[1] = false;
+    }else if(t3OlcumAktif == "0" && int.parse(manSeviyeT3)>=200){
+      t3ortalamadakiSensor[1] = true;
     }
 
-    if (seviyeT3 >= double.parse(sensSev2)) {
+    if (seviyeT3 >= double.parse(sensSev2)-0.26) {
       t3ortalamadakiSensor[2] = true;
     } else {
       t3ortalamadakiSensor[2] = false;
     }
 
-    if (seviyeT3 >= double.parse(sensSev3)) {
+    if (seviyeT3 >= double.parse(sensSev3)-0.26) {
       t3ortalamadakiSensor[3] = true;
     } else {
       t3ortalamadakiSensor[3] = false;
@@ -3471,17 +3467,19 @@ class _HomePageState extends State<HomePage> {
 
     if (t4OlcumAktif == "1") {
       t4ortalamadakiSensor[1] = true;
-    } else {
+    } else if(t4OlcumAktif == "0" && int.parse(manSeviyeT4)<200) {
       t4ortalamadakiSensor[1] = false;
+    }else if(t4OlcumAktif == "0" && int.parse(manSeviyeT4)>=200){
+      t4ortalamadakiSensor[1] = true;
     }
 
-    if (seviyeT4 >= double.parse(sensSev2)) {
+    if (seviyeT4 >= double.parse(sensSev2)-0.26) {
       t4ortalamadakiSensor[2] = true;
     } else {
       t4ortalamadakiSensor[2] = false;
     }
 
-    if (seviyeT4 >= double.parse(sensSev3)) {
+    if (seviyeT4 >= double.parse(sensSev3)-0.26) {
       t4ortalamadakiSensor[3] = true;
     } else {
       t4ortalamadakiSensor[3] = false;
@@ -3489,17 +3487,19 @@ class _HomePageState extends State<HomePage> {
 
     if (t5OlcumAktif == "1") {
       t5ortalamadakiSensor[1] = true;
-    } else {
+    } else if(t5OlcumAktif == "0" && int.parse(manSeviyeT5)<200) {
       t5ortalamadakiSensor[1] = false;
+    }else if(t5OlcumAktif == "0" && int.parse(manSeviyeT5)>=200){
+      t5ortalamadakiSensor[1] = true;
     }
 
-    if (seviyeT5 >= double.parse(sensSev2)) {
+    if (seviyeT5 >= double.parse(sensSev2)-0.3) {
       t5ortalamadakiSensor[2] = true;
     } else {
       t5ortalamadakiSensor[2] = false;
     }
 
-    if (seviyeT5 >= double.parse(sensSev3)) {
+    if (seviyeT5 >= double.parse(sensSev3)-0.3) {
       t5ortalamadakiSensor[3] = true;
     } else {
       t5ortalamadakiSensor[3] = false;
@@ -3616,3 +3616,28 @@ class _HomePageState extends State<HomePage> {
     return _donusDegeri;
   }
 }
+
+
+
+/*
+FutureBuilder(
+                                  future: DefaultAssetBundle.of(context)
+                                      .loadString("assets/data.json"),
+                                  builder: (context, snapshot) {
+                                    var mydata =
+                                        jsonDecode(snapshot.data.toString());
+                                    print(mydata["example_data"][0]["ip"]);
+                                    ipNo = (mydata["example_data"][0]["ip"])
+                                        .toString();
+                                    return SizedBox(
+                                      child: Container(
+                                        child: AutoSizeText(
+                                          ipNo,
+                                          style: TextStyle(fontSize: 10 * oran),
+                                          minFontSize: 2,
+                                        ),
+                                      ),
+                                    );
+                                  }),
+
+                                  */

@@ -734,25 +734,30 @@ class _TankGrafikState extends State<TankGrafik> {
       String veri = "";
 
       veri = (_yuzler * 100 + _onlar * 10 + _birler).toString();
+      int data = _yuzler * 100 + _onlar * 10 + _birler;
 
-      if (veriGonderilsinMi) {
-        yazmaSonrasiGecikmeSayaci = 0;
-        String komut = "4*$index*$veri";
-        veriGonder(komut, 3000).then((value) {
-          if (value.split("*")[0] == "error") {
-            Toast.show(
-                "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
-                context,
-                duration: 3);
-          } else {
-            Toast.show("Başarılı", context, duration: 3);
+      if (data > (index==5 ? 300 : 260)) {
+        Toast.show(index==5 ? "300 mm değerinden büyük değer girilemez!" : "260 mm değerinden büyük değer girilemez!", context,duration: 3);
+      } else {
+        if (veriGonderilsinMi) {
+          yazmaSonrasiGecikmeSayaci = 0;
+          String komut = "4*$index*$veri";
+          veriGonder(komut, 3000).then((value) {
+            if (value.split("*")[0] == "error") {
+              Toast.show(
+                  "Yazdırma hatası! Yazdırma portu kapalı.Ağ hatası yoksa Server PC\'yi yeniden başlatınız.",
+                  context,
+                  duration: 3);
+            } else {
+              Toast.show("Başarılı", context, duration: 3);
 
-            baglanti = false;
-          }
-        });
+              baglanti = false;
+            }
+          });
+        }
+
+        setState(() {});
       }
-
-      setState(() {});
     });
   }
 
@@ -763,7 +768,7 @@ class _TankGrafikState extends State<TankGrafik> {
 
     // =============================================================
     Socket _socket;
-    await Socket.connect("192.168.1.90", portNo, timeout: Duration(seconds: 5))
+    await Socket.connect("192.168.1.110", portNo, timeout: Duration(seconds: 5))
         .then((Socket sock) {
       _socket = sock;
     }).then((_) {
